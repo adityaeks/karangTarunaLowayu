@@ -2,8 +2,9 @@
     <div class="container">
         <a class="navbar-brand pe-4 fs-4" href="/">
             <img src="/images/logo-karang-taruna.png" alt="Karang Taruna Lowayu" width="32" height="32" />
-            <span class="ms-1 fw-bolder">Karang Taruna Lowayu</span>
+            <span class="ms-1" style="font-weight: bold;">Karang Taruna Lowayu</span>
         </a>
+
 
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -27,18 +28,18 @@
                         Organisasi
                     </a>
                 </li>
-                <!-- Dropdown Profile -->
+                <!-- Dropdown untuk Profile -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Profile
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                        <li><a class="dropdown-item" href="/profile/view">Tentang</a></li>
-                        <li><a class="dropdown-item" href="/profile/settings">Program</a></li>
-                        <li><a class="dropdown-item" href="/profile/settings">Struktur</a></li>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
                     </ul>
                 </li>
+                <!-- End of Profile Dropdown -->
                 <li class="nav-item">
                     <a class="nav-link" href="#aboutus">
                         Pengaduan

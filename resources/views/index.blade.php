@@ -1,29 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-100 overflow-hidden bg-gray-100" id="top">
+<style>
+    /* Styling for carousel and images */
+    .carousel-inner {
+        display: block;
+    }
 
-        <div class="container position-relative">
-            <div class="row">
-                <div class="col-lg-7 py-vh-6 position-relative" >
-                    <h1 class="display-1 fw-bold mt-5">Sell more useless stuff faster!</h1>
-                    <p class="lead">To be honest, this is just a stupid placeholder text. We don´t know how to
-                        sell anything, not even lesser or slower as you.</p>
+    .carousel-item {
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>
+<div class="w-100 overflow-hidden bg-gray-100" id="top">
+    <div class="container position-relative">
+        <div class="row align-items-stretch">
+            <div class="col-lg-7 py-vh-6 position-relative d-flex flex-column justify-content-between">
+                <h1 class="display-1 fw-bold mt-5">Sell more useless stuff faster!</h1>
+                <p class="lead">To be honest, this is just a stupid placeholder text. We don´t know how to
+                    sell anything, not even lesser or slower as you.</p>
+            </div>
+            <div class="col-lg-5 py-vh-6 d-flex flex-column justify-content-between gap-3">
+                <div class="p-3 bg-light border" style="height: 70%;">Grid Item 1</div>
+                <div id="carouselExample" class="carousel slide p-3 bg-light border" style="height: 30%;" data-bs-ride="carousel" data-bs-interval="2000" data-bs-wrap="true">
+                    <div class="carousel-inner">
+                        <!-- Carousel Item 1 -->
+                        <div class="carousel-item active">
+                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 1" style="height: 100%; object-fit: cover;">
+                        </div>
+                        <!-- Carousel Item 2 -->
+                        <div class="carousel-item">
+                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 2" style="height: 100%; object-fit: cover;">
+                        </div>
+                        <!-- Carousel Item 3 -->
+                        <div class="carousel-item">
+                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 3" style="height: 100%; object-fit: cover;">
+                        </div>
+                        <!-- Add more items as needed -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
 
     <div class="py-vh-5 w-100 overflow-hidden" id="services">
         <div class="container">
             <div class="row d-flex justify-content-end">
-                <div class="col-lg-8" >
+                <div class="col-lg-8">
                     <h2 class="display-6">Okay, there are three really good reasons for us. There are no more than
                         three, but we think three is a reasonable good number of good stuff.</h2>
                 </div>
             </div>
             <div class="row d-flex align-items-center">
-                <div class="col-md-6 col-lg-4" >
+                <div class="col-md-6 col-lg-4">
                     <span class="h5 fw-lighter">01.</span>
                     <h3 class="py-5 border-top border-dark">We rented this fancy startup office in an old factory
                         building.</h3>
@@ -34,7 +73,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-6 col-lg-4 py-vh-4 pb-0" >
+                <div class="col-md-6 col-lg-4 py-vh-4 pb-0">
                     <span class="h5 fw-lighter">02.</span>
                     <h3 class="py-5 border-top border-dark">We don´t know exactly what we are doing. But thats good
                         because we can´t break something intentionally.</h3>

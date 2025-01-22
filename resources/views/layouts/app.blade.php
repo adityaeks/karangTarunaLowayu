@@ -19,7 +19,7 @@
 
     <!-- Your custom styles here -->
     <link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
-    
+
 
     <!-- Your custom fonts here -->
     <style>

@@ -27,43 +27,40 @@ class PengaduanResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
     public static function form(Form $form): Form
-{
-    return $form
-        ->schema([
-            TextInput::make('name')
-                ->required(),
+    {
+        return $form
+            ->schema([
+                TextInput::make('name')
+                    ->required(),
 
-            TextInput::make('number')
-                ->prefix('+62')
-                ->numeric()
-                ->required(),
+                TextInput::make('number')
+                    ->prefix('+62')
+                    ->numeric()
+                    ->required(),
 
-            Textarea::make('content')
-                ->rows(10)
-                ->cols(20)
-                ->required(),
+                Textarea::make('content')
+                    ->rows(10)
+                    ->cols(20)
+                    ->required(),
 
-            FileUpload::make('bukti_pengaduan')
-        ]);
-}
-
+                FileUpload::make('bukti_pengaduan')
+            ]);
+    }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
                 TextColumn::make('index')
-                ->label('No')
-                ->getStateUsing(function ($rowLoop, $record) {
-                    return $rowLoop->iteration;
-                }),
+                    ->label('No')
+                    ->getStateUsing(function ($rowLoop, $record) {
+                        return $rowLoop->iteration;
+                    }),
                 ImageColumn::make('bukti_pengaduan'),
                 TextColumn::make('name'),
                 TextColumn::make('number')
                     ->getStateUsing(function ($record) {
-                        // Menambahkan prefix +62
-                        return '+62' . ltrim($record->number, '0'); // Menghapus 0 di awal jika ada
+                        return '+62' . ltrim($record->number, '0');
                     }),
                 TextColumn::make('content'),
             ])

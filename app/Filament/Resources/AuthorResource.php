@@ -2,40 +2,34 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrganisasiResource\Pages;
-use App\Filament\Resources\OrganisasiResource\RelationManagers;
-use App\Models\Organisasi;
-use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
+use App\Filament\Resources\AuthorResource\Pages;
 use Filament\Forms\Components\TextInput;
+use App\Filament\Resources\AuthorResource\RelationManagers;
+use App\Models\Author;
+use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class OrganisasiResource extends Resource
+class AuthorResource extends Resource
 {
-    protected static ?string $model = Organisasi::class;
+    protected static ?string $model = Author::class;
 
+    protected static ?string $navigationIcon = 'heroicon-o-pencil';
+    protected static ?string $navigationLabel = 'Penulis';
     protected static ?string $navigationGroup = 'Kelola Website';
-
-    protected static ?string $navigationLabel = 'Organisasi';
-    protected static ?string $pluralLabel = 'Organiasi';
-
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $pluralLabel = 'Penulis';
+    protected static ?string $label = 'Penulis';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->required(),
-
-                FileUpload::make('photo')
                     ->required(),
             ]);
     }
@@ -44,8 +38,14 @@ class OrganisasiResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                ImageColumn::make('photo'),
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable()
+                    ->extraAttributes(['class' => 'w-16']), // misal kolom ID dengan lebar kecil
+                TextColumn::make('name')
+                    ->label('Nama')
+                    ->extraAttributes(['class' => 'w-32']),
+                // tambahkan kolom lain sesuai kebutuhan...
             ])
             ->filters([
                 //
@@ -60,6 +60,7 @@ class OrganisasiResource extends Resource
             ]);
     }
 
+
     public static function getRelations(): array
     {
         return [
@@ -70,9 +71,9 @@ class OrganisasiResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOrganisasis::route('/'),
-            'create' => Pages\CreateOrganisasi::route('/create'),
-            'edit' => Pages\EditOrganisasi::route('/{record}/edit'),
+            'index' => Pages\ListAuthors::route('/'),
+            'create' => Pages\CreateAuthor::route('/create'),
+            'edit' => Pages\EditAuthor::route('/{record}/edit'),
         ];
     }
 }

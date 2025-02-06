@@ -1,255 +1,340 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    /* Styling for carousel and images */
-    .carousel-inner {
-        display: block;
-    }
-
-    .carousel-item {
-        width: 100%;
-        height: 100%;
-    }
-
-    .carousel-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-</style>
-<div class="w-100 overflow-hidden bg-gray-100" id="top">
-    <div class="container position-relative">
-        <div class="row align-items-stretch">
-            <div class="col-lg-7 py-vh-6 position-relative d-flex flex-column justify-content-between">
-                <h1 class="display-1 fw-bold mt-5">Sell more useless stuff faster!</h1>
-                <p class="lead">To be honest, this is just a stupid placeholder text. We don´t know how to
-                    sell anything, not even lesser or slower as you.</p>
-            </div>
-            <div class="col-lg-5 py-vh-6 d-flex flex-column justify-content-between gap-3">
-                <div class="p-3 bg-light border" style="height: 70%;">Grid Item 1</div>
-                <div id="carouselExample" class="carousel slide p-3 bg-light border" style="height: 30%;" data-bs-ride="carousel" data-bs-interval="2000" data-bs-wrap="true">
-                    <div class="carousel-inner">
-                        <!-- Carousel Item 1 -->
-                        <div class="carousel-item active">
-                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 1" style="height: 100%; object-fit: cover;">
+    <!-- Trending Area Start -->
+    <div class="trending-area fix">
+        <div class="container">
+            <div class="trending-main">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Trending Top -->
+                        <div class="trending-top mb-30">
+                            <div class="trend-top-img">
+                                <img src="assets/img/trending/trending_top.jpg" alt="">
+                                <div class="trend-top-cap">
+                                    <span>Appetizers</span>
+                                    <h2><a href="details.html">Welcome To The Best Model Winner<br> Contest At Look of the
+                                            year</a></h2>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Carousel Item 2 -->
-                        <div class="carousel-item">
-                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 2" style="height: 100%; object-fit: cover;">
+                        <!-- Trending Bottom -->
+                        <div class="trending-bottom">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="assets/img/trending/trending_bottom1.jpg" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color1">Lifestyple</span>
+                                            <h4><a href="details.html">Get the Illusion of Fuller Lashes by “Mascng.”</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="assets/img/trending/trending_bottom2.jpg" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color2">Sports</span>
+                                            <h4>
+                                                <h4><a href="details.html">Get the Illusion of Fuller Lashes by
+                                                        “Mascng.”</a></h4>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="single-bottom mb-35">
+                                        <div class="trend-bottom-img mb-30">
+                                            <img src="assets/img/trending/trending_bottom3.jpg" alt="">
+                                        </div>
+                                        <div class="trend-bottom-cap">
+                                            <span class="color3">Travels</span>
+                                            <h4><a href="details.html"> Welcome To The Best Model Winner Contest</a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <!-- Carousel Item 3 -->
-                        <div class="carousel-item">
-                            <img src="logo-karang-taruna.png" class="d-block w-100 rounded" alt="Image 3" style="height: 100%; object-fit: cover;">
-                        </div>
-                        <!-- Add more items as needed -->
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-    <div class="py-vh-5 w-100 overflow-hidden" id="services">
-        <div class="container">
-            <div class="row d-flex justify-content-end">
-                <div class="col-lg-8">
-                    <h2 class="display-6">Okay, there are three really good reasons for us. There are no more than
-                        three, but we think three is a reasonable good number of good stuff.</h2>
-                </div>
-            </div>
-            <div class="row d-flex align-items-center">
-                <div class="col-md-6 col-lg-4">
-                    <span class="h5 fw-lighter">01.</span>
-                    <h3 class="py-5 border-top border-dark">We rented this fancy startup office in an old factory
-                        building.</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus culpa, voluptatibus ex
-                        itaque, sapiente a consequatur inventore beatae, ipsam debitis omnis consequuntur iste
-                        asperiores. Similique quisquam debitis corrupti deserunt, dolor.</p>
-                    <a href="#" class="link-fancy">Learn more
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4 py-vh-4 pb-0">
-                    <span class="h5 fw-lighter">02.</span>
-                    <h3 class="py-5 border-top border-dark">We don´t know exactly what we are doing. But thats good
-                        because we can´t break something intentionally.</h3>
-                    <p>Lorem, ipsum dolor sit adipisicing elit. Minus culpa, voluptatibus ex itaque, sapiente a
-                        consequatur inventore beatae, ipsam debitis omnis consequuntur iste asperiores. Similique
-                        quisquam debitis corrupti deserunt, dolor.</p>
-                    <a href="#" class="link-fancy">Learn more
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4 py-vh-6 pb-0">
-                    <span class="h5 fw-lighter">03.</span>
-                    <h3 class="py-5 border-top border-dark">There is no real number three reason. So please read
-                        again number one and two.</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus culpa, voluptatibus ex
-                        itaque, sapiente a consequatur inventore beatae, ipsam debitis omnis consequuntur iste
-                        asperiores. Similique quisquam debitis corrupti deserunt, dolor.</p>
-                    <a href="#" class="link-fancy">Learn more
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="py-vh-4 bg-gray-100 w-100 overflow-hidden" id="aboutus">
-        <div class="container">
-
-            <div class="row d-flex justify-content-between align-items-center">
-                <div class="col-lg-6">
-                    <div class="row gx-5 d-flex">
-                        <div class="col-md-11">
-                            <div class="shadow ratio ratio-16x9 rounded bg-cover bp-center align-self-end"
-                                data-aos="fade-right"
-                                style="background-image: url(img/webp/people15.webp);--bs-aspect-ratio: 50%;">
+                    <!-- Riht content -->
+                    <div class="col-lg-4">
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right1.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Concert</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
                             </div>
                         </div>
-                        <div class="col-md-5 offset-md-1">
-                            <div class="shadow ratio ratio-1x1 rounded bg-cover mt-5 bp-center float-end" data-aos="fade-up"
-                                style="background-image: url(img/webp/interior42.webp);">
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right2.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color3">sea beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="col-12 shadow ratio rounded bg-cover mt-5 bp-center" data-aos="fade-left"
-                                style="background-image: url(img/webp/people4.webp);--bs-aspect-ratio: 150%;">
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right3.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color2">Bike Show</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right4.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color4">See beach</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
+                            </div>
+                        </div>
+                        <div class="trand-right-single d-flex">
+                            <div class="trand-right-img">
+                                <img src="assets/img/trending/right5.jpg" alt="">
+                            </div>
+                            <div class="trand-right-cap">
+                                <span class="color1">Skeping</span>
+                                <h4><a href="details.html">Welcome To The Best Model Winner Contest</a></h4>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <h3 class="py-5 border-top border-dark" data-aos="fade-left">We did some interesting stuff in
-                        our field of work. For example we collect a lot of these free photos and use them on our
-                        website.</h3>
-                    <p data-aos="fade-left" data-aos-delay="200">Donec id elit non mi porta gravida at eget metus.
-                        Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa
-                        justo sit amet risus.
-                    </p>
-                    <p>
-                        <a href="#" class="link-fancy link-dark" data-aos="fade-left" data-aos-delay="400">Learn
-                            more
-                        </a>
-                    </p>
-                </div>
             </div>
-
         </div>
     </div>
-
-    <div class="py-vh-5 w-100 overflow-hidden" id="numbers">
+    <!-- Trending Area End -->
+    <!--   Weekly2-News start -->
+    <div class="weekly2-news-area  weekly2-pading gray-bg">
         <div class="container">
-            <div class="row d-flex justify-content-between align-items-center">
-                <div class="col-lg-5">
-                    <h3 class="py-5 border-top border-dark" data-aos="fade-right">Our magic numbers</h3>
-                </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="display-6 mb-5" data-aos="fade-down">There are some important numbers for
-                                us. They are just numbers without any meaning, but we just love them.</h2>
-                        </div>
-                        <div class="col-lg-6" data-aos="fade-up">
-                            <div class="display-1 fw-bold py-4">42%</div>
-                            <p class="text-black-50">Donec id elit non mi porta gravida at eget metus. Fusce
-                                dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
-                                sed odio dui.</p>
-                        </div>
-                        <div class="col-lg-6" data-aos="fade-up">
-                            <div class="display-1 fw-bold py-4">+300</div>
-                            <p class="text-black-50">Donec id elit non mi porta gravida at eget metus. Fusce
-                                dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum
-                                massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec
-                                sed odio dui.</p>
+            <div class="weekly2-wrapper">
+                <!-- section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30">
+                            <h3>Weekly Top News</h3>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="position-relative overflow-hidden w-100 bg-light" id="gallery">
-        <div class="container-fluid">
-            <div class="row overflow-scroll">
-                <div class="col-12">
-                    <div class="row vw-100 px-0 py-vh-5 d-flex align-items-center scrollx">
-                        <div class="col-md-2" data-aos="fade-up">
-                            <img src="img/webp/interior37.webp" class="rounded shadow img-fluid" alt="nice gallery image"
-                                width="512" height="341">
-                        </div>
-
-                        <div class="col-md-2" data-aos="fade-up" data-aos-delay="200">
-                            <img src="img/webp/people1.webp" class="img-fluid rounded shadow" alt="nice gallery image"
-                                width="1164" height="776">
-                        </div>
-
-                        <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
-                            <img src="img/webp/people2.webp" class="img-fluid rounded shadow" alt="nice gallery image"
-                                width="844" height="1054">
-                        </div>
-
-                        <div class="col-md-3" data-aos="fade-up" data-aos-delay="600">
-                            <img src="img/webp/interior29.webp" class="img-fluid rounded shadow" alt="nice gallery image"
-                                width="844" height="562">
-                        </div>
-
-                        <div class="col-md-2" data-aos="fade-up" data-aos-delay="800">
-                            <img src="img/webp/people23.webp" class="rounded shadow img-fluid" alt="nice gallery image"
-                                width="512" height="341">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="container py-vh-4 w-100 overflow-hidden">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-lg-5">
-                <h3 class="py-5 border-top border-dark" data-aos="fade-right">What our clients say</h3>
-            </div>
-            <div class="col-md-7" data-aos="fade-left">
-                <blockquote>
-                    <div class="fs-4 my-3 fw-light pt-4 border-bottom pb-3">“I´am the CEO of this company. So maybe
-                        you think "he will tell us something super awesome about it only". But no. Its a really
-                        strange place to work with creepy people all around.
-                        They do some computer stuff I don´t understand. But I wear expensive Glasses and a Patagonia
-                        Hoodie. So I´am fine with it.”</div>
-                    <img src="img/webp/person11.webp" width="64" height="64"
-                        class="img-fluid rounded-circle me-3" alt="" data-aos="fade">
-                    <span><span class="fw-bold">John Doe,</span>
-                        CEO of Stride Ltd.</span>
-                </blockquote>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="py-vh-6 bg-gray-900 text-light w-100 overflow-hidden" id="workwithus">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="row d-flex justify-content-center text-center">
-                    <div class="col-lg-8 text-center" data-aos="fade">
-                        <p class="text-secondary lead">Let´s start a project together!</p>
-                        <h2 class="display-6 mb-5">Hell no! This button is linked to a none working contact form. A
-                            none working form without any user feedback. So you might think you done something
-                            wrong. But in reality we just don´t want to start anything with you or anyone else.</h2>
-                    </div>
+                <div class="row">
                     <div class="col-12">
-                        <a href="#" class="btn btn-warning btn-xl shadow me-3 mt-4" data-aos="fade-down">Get in
-                            contact</a>
+                        <div class="weekly2-news-active dot-style d-flex dot-style">
+                            <div class="weekly2-single">
+                                <div class="weekly2-img">
+                                    <img src="assets/img/news/weekly2News1.jpg" alt="">
+                                </div>
+                                <div class="weekly2-caption">
+                                    <span class="color1">Corporate</span>
+                                    <p>25 Jan 2020</p>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly2-single">
+                                <div class="weekly2-img">
+                                    <img src="assets/img/news/weekly2News2.jpg" alt="">
+                                </div>
+                                <div class="weekly2-caption">
+                                    <span class="color1">Event night</span>
+                                    <p>25 Jan 2020</p>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly2-single">
+                                <div class="weekly2-img">
+                                    <img src="assets/img/news/weekly2News3.jpg" alt="">
+                                </div>
+                                <div class="weekly2-caption">
+                                    <span class="color1">Corporate</span>
+                                    <p>25 Jan 2020</p>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly2-single">
+                                <div class="weekly2-img">
+                                    <img src="assets/img/news/weekly2News4.jpg" alt="">
+                                </div>
+                                <div class="weekly2-caption">
+                                    <span class="color1">Event time</span>
+                                    <p>25 Jan 2020</p>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="weekly2-single">
+                                <div class="weekly2-img">
+                                    <img src="assets/img/news/weekly2News4.jpg" alt="">
+                                </div>
+                                <div class="weekly2-caption">
+                                    <span class="color1">Corporate</span>
+                                    <p>25 Jan 2020</p>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    <!-- End Weekly-News -->
+    <!--  Recent Articles start -->
+    <div class="recent-articles">
+        <div class="container">
+            <div class="recent-wrapper">
+                <!-- section Tittle -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30">
+                            <h3>Recent Articles</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="recent-active dot-style d-flex dot-style">
+                            <div class="single-recent mb-100">
+                                <div class="what-img">
+                                    <img src="assets/img/news/recent1.jpg" alt="">
+                                </div>
+                                <div class="what-cap">
+                                    <span class="color1">Night party</span>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="single-recent mb-100">
+                                <div class="what-img">
+                                    <img src="assets/img/news/recent2.jpg" alt="">
+                                </div>
+                                <div class="what-cap">
+                                    <span class="color1">Night party</span>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="single-recent mb-100">
+                                <div class="what-img">
+                                    <img src="assets/img/news/recent3.jpg" alt="">
+                                </div>
+                                <div class="what-cap">
+                                    <span class="color1">Night party</span>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                            <div class="single-recent mb-100">
+                                <div class="what-img">
+                                    <img src="assets/img/news/recent2.jpg" alt="">
+                                </div>
+                                <div class="what-cap">
+                                    <span class="color1">Night party</span>
+                                    <h4><a href="#">Welcome To The Best Model Winner Contest</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Recent Articles End -->
+
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding fix">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
+                        <div class="single-footer-caption">
+                            <div class="single-footer-caption">
+                                <!-- logo -->
+                                <div class="footer-logo">
+                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p>Suscipit mauris pede for con sectetuer sodales adipisci for cursus fames lectus
+                                            tempor da blandit gravida sodales Suscipit mauris pede for con sectetuer sodales
+                                            adipisci for cursus fames lectus tempor da blandit gravida sodales Suscipit
+                                            mauris pede for sectetuer.</p>
+                                    </div>
+                                </div>
+                                <!-- social -->
+                                <div class="footer-social">
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4  col-sm-6">
+                        <div class="single-footer-caption mt-60">
+                            <div class="footer-tittle">
+                                <h4>Newsletter</h4>
+                                <p>Heaven fruitful doesn't over les idays appear creeping</p>
+                                <!-- Form -->
+                                <div class="footer-form">
+                                    <div id="mc_embed_signup">
+                                        <form target="_blank"
+                                            action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                            method="get" class="subscribe_form relative mail_part">
+                                            <input type="email" name="email" id="newsletter-form-email"
+                                                placeholder="Email Address" class="placeholder hide-on-focus"
+                                                onfocus="this.placeholder = ''"
+                                                onblur="this.placeholder = ' Email Address '">
+                                            <div class="form-icon">
+                                                <button type="submit" name="submit" id="newsletter-submit"
+                                                    class="email_icon newsletter-submit button-contactForm"><img
+                                                        src="assets/img/logo/form-iocn.png" alt=""></button>
+                                            </div>
+                                            <div class="mt-10 info"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer-bottom aera -->
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-lg-6">
+                            <div class="footer-copy-right">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>
+                                        document.write(new Date().getFullYear());
+                                    </script> All rights reserved | This template is made with <i
+                                        class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                                        target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="footer-menu f-right">
+                                <ul>
+                                    <li><a href="#">Terms of use</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
 @endsection

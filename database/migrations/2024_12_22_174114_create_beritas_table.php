@@ -13,11 +13,32 @@ return new class extends Migration
     {
         Schema::create('beritas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('photo');
-            $table->string('category');
-            $table->string('content');
+            $table->string('name'); // Judul Berita
+            $table->string('slug')->unique();
+            $table->text('content');
+            $table->foreignId('author_id')->nullable();
+            $table->foreignId('category_id')->nullable();
+            $table->date('published_at')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('beritas', function (Blueprint $table) {
+            if (Schema::hasTable('authors')) {
+                $table->foreign('author_id')
+                      ->references('id')
+                      ->on('authors')
+                      ->onUpdate('cascade')
+                      ->onDelete('cascade');
+            }
+
+            if (Schema::hasTable('categories')) {
+                $table->foreign('category_id')
+                      ->references('id')
+                      ->on('categories')
+                      ->onUpdate('cascade')
+                      ->onDelete('cascade');
+            }
         });
     }
 

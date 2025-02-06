@@ -7,15 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class berita extends Model
 {
-    //
     use HasFactory;
 
     // Field yang diizinkan untuk mass assignment
     protected $fillable = [
         'name',
         'photo',
-        'category',
         'content',
+        'published_at',
+        'slug',
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(Author::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

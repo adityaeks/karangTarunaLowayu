@@ -44,6 +44,8 @@ class PengaduanResource extends Resource
                     ->required(),
 
                 FileUpload::make('bukti_pengaduan')
+                    ->label('Bukti Pengaduan')
+                    ->required(),
             ]);
     }
 
@@ -56,13 +58,16 @@ class PengaduanResource extends Resource
                     ->getStateUsing(function ($rowLoop, $record) {
                         return $rowLoop->iteration;
                     }),
-                ImageColumn::make('bukti_pengaduan'),
+                ImageColumn::make('bukti_pengaduan')
+                    ->label('Bukti Pengaduan')
+                    ->disk('public'),
                 TextColumn::make('name'),
                 TextColumn::make('number')
                     ->getStateUsing(function ($record) {
                         return '+62' . ltrim($record->number, '0');
                     }),
-                TextColumn::make('content'),
+                TextColumn::make('content')
+                    ->label('Pesan Pengaduan'),
             ])
             ->filters([
                 //

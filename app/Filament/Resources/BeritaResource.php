@@ -91,7 +91,8 @@ class BeritaResource extends Resource
             ->columns([
                 ImageColumn::make('photo')->label('Thumbnail'),
                 TextColumn::make('published_at')->label('Date'), // Add this line
-                TextColumn::make('name')->label('Title'),
+                TextColumn::make('name')->label('Title')
+                ->limit(15),
                 TextColumn::make('author.name')->label('Author'),
                 TextColumn::make('category.name')->label('Category'),
                 TextColumn::make('content')

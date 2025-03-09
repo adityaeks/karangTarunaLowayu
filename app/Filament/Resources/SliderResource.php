@@ -6,9 +6,11 @@ use App\Filament\Resources\SliderResource\Pages;
 use App\Filament\Resources\SliderResource\RelationManagers;
 use App\Models\Slider;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -26,7 +28,11 @@ class SliderResource extends Resource
     {
         return $form
             ->schema([
-                //
+                FileUpload::make('photo')
+                    ->label('Banner')
+                    ->image()
+                    ->directory('sliders') // Direktori penyimpanan
+                    ->required(),
             ]);
     }
 
@@ -34,7 +40,8 @@ class SliderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                ImageColumn::make('photo')
+                    ->label('Banner'),
             ])
             ->filters([
                 //

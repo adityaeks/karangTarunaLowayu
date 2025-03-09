@@ -34,7 +34,8 @@ class OrganisasiResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required(),
-
+                TextInput::make('description')
+                    ->required(),
                 FileUpload::make('photo')
                     ->required(),
             ]);
@@ -44,8 +45,9 @@ class OrganisasiResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
                 ImageColumn::make('photo'),
+                TextColumn::make('name'),
+                TextColumn::make('description'),
             ])
             ->filters([
                 //

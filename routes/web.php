@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Berita;
+use App\Models\Organisasi;
 use App\Http\Controllers\PengaduanController;
 
 Route::get('/', function () {
@@ -38,14 +39,15 @@ Route::get('/search', function () {
 Route::get('/about', function () {
     return view('pages.about');
 });
-Route::get('/program', function () {
-    return view('pages.program');
-});
+// Route::get('/program', function () {
+//     return view('pages.program');
+// });
 Route::get('/structur', function () {
     return view('pages.structur');
 });
 Route::get('/organisasi', function () {
-    return view('pages.organitation');
+    $organisasis = Organisasi::all();
+    return view('pages.organitation', compact('organisasis'));
 });
 Route::get('/pengaduan', function () {
     return view('pages.complaint');

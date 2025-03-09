@@ -67,7 +67,7 @@
                         <!-- Sticky Logo dengan teks di samping icon -->
                         <div class="sticky-logo">
                             <a href="{{ url('/') }}" class="d-flex align-items-center text-decoration-none">
-                                <img src="{{ asset('assets/img/logo/logo2.png') }}" alt="Logo">
+                                <img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" alt="Logo" style="width: 40px; height: auto;">
                                 <span class="nav-link">Karang Taruna Lowayu</span>
                             </a>
                         </div>
@@ -81,11 +81,10 @@
                                         <a href="#">Profil</a>
                                         <ul class="submenu">
                                             <li><a href="{{ url('/about') }}">Tentang</a></li>
-                                            <li><a href="{{ url('/program') }}">Program</a></li>
                                             <li><a href="{{ url('/structur') }}">Struktur</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="{{ url('/organisasi') }}">Organisasi Desa</a></li>
+                                    <li><a href="{{ url('/organisasi') }}">Organisasi Kepemudaan</a></li>
                                     <li><a href="{{ url('/pengaduan') }}">Pengaduan</a></li>
                                 </ul>
                             </nav>

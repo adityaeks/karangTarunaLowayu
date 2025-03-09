@@ -13,5 +13,6 @@ class organisasi extends Model
     protected $fillable = [
         'name',
         'photo',
+        'description',
     ];
 }

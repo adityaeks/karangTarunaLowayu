@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mt-5">
+    {{-- <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
                 <h3 class="mb-0">Form Pengaduan</h3>
@@ -39,8 +39,8 @@
                 </form>
             </div>
         </div>
-    </div>
-    {{-- <div class="container mt-4">
+    </div> --}}
+    <div class="container mt-4">
         <div class="row">
             <div class="col-12">
                 <h2 class="contact-title">Pengaduan</h2>
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit">Kirim</button>
+                    {{-- <button type="submit">Kirim</button> --}}
                     <div class="form-group mt-3">
                         <button type="submit" class="button button-contactForm boxed-btn">Send</button>
                     </div>
@@ -124,8 +124,8 @@
                         <h3>support@colorlib.com</h3>
                         <p>Send us your query anytime!</p>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection

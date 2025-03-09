@@ -4,7 +4,7 @@
             <div class="col-xl-5 col-lg-5 col-md-7 col-sm-12">
                 <div class="single-footer-caption">
                     <div class="footer-logo">
-                        <a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo/logo2.png') }}" class="img-fluid"
+                        <a href="{{ url('/') }}"><img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" class="img-fluid" style="width: 100px; height: auto;"
                                 alt=""></a>
                     </div>
                     <div class="footer-tittle">

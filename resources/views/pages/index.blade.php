@@ -2,7 +2,7 @@
 @section('content')
     @php
         $slider = App\Models\Slider::latest()->first();
-        $news = App\Models\Berita::all();
+        $news = App\Models\Berita::latest()->get();
         $sliderImages = App\Models\Slider::latest()->take(5)->get();
     @endphp
     <!-- Trending Area Start -->
@@ -42,21 +42,25 @@
                                 @endif
                             </div>
                         </div>
+
                     </div>
                     <!-- Right Content -->
                     <div class="col-lg-4">
                         @if ($news->count() > 0)
                             @foreach ($news->take(4) as $item)
-                                <div class="trand-right-single d-flex mb-3">
-                                    <div class="trand-right-img">
-                                        <img src="{{ asset('storage/' . $item->photo) }}" alt="" class="img-fluid"
-                                            style="width: 200px; height: 100px; object-fit: cover;">
+                                <a href="{{ url('/detail/' . $item->slug) }}" class="text-decoration-none d-block">
+                                    <div class="trand-right-single d-flex mb-3">
+                                        <div class="trand-right-img" style="width: 180px; height: 100px; overflow: hidden;">
+                                            <img src="{{ asset('storage/' . $item->photo) }}" alt="" class="img-fluid"
+                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                        </div>
+                                        <div class="trand-right-cap" style="flex: 1; margin-left: 15px;">
+                                            <h4 class="text-dark hover-text">{{ Str::limit($item->name, 30) }}</h4>
+                                            <span class="color1">{{ $item->created_at->format('d/m/Y') }}</span>
+                                            <p class="small text-muted mt-1">{{ Str::limit(strip_tags($item->content), 30) }}</p>
+                                        </div>
                                     </div>
-                                    <div class="trand-right-cap">
-                                        <h4><a href="{{ url('/detail/' . $item->id) }}">{{ Str::limit($item->name, 30) }}</a></h4>
-                                        <span class="color1">{{ $item->created_at->format('d/m/Y') }}</span>
-                                    </div>
-                                </div>
+                                </a>
                             @endforeach
                         @else
                             <p>No news available.</p>
@@ -68,7 +72,124 @@
     </div>
     <!-- Trending Area End -->
 
-    <!-- Weekly News Area Start -->
+    {{-- Kategori Sosial --}}
+    <div class="weekly2-news-area weekly2-pading gray-bg">
+        <div class="container">
+            <div class="weekly2-wrapper">
+                <!-- Section Title -->
+                @php
+                    $weeklyNews = App\Models\Berita::where('category_id', 2)->get();
+                @endphp
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30 d-flex justify-content-between align-items-center">
+                            <h3>Sosial</h3>
+                            <a href="{{ url('/blog?category=2') }}" class="more-news-link">More news...</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach ($weeklyNews->take(4) as $newsItem)
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
+                                <div class="single-recent mb-30">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/' . $newsItem->photo) }}" alt="" class="img-fluid card-img-top"
+                                        style="width: 100%; height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="body-cap card-body">
+                                        <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
+                                        <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 40) }}</h4>
+                                        <p class="text-muted small">{{ Str::limit(strip_tags($newsItem->content), 100) }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Kategori Kemasyarakatan --}}
+    <div class="weekly2-news-area weekly2-pading gray-bg">
+        <div class="container">
+            <div class="weekly2-wrapper">
+                <!-- Section Title -->
+                @php
+                    $weeklyNews = App\Models\Berita::where('category_id', 4)->get();
+                @endphp
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30 d-flex justify-content-between align-items-center">
+                            <h3>Kemasyarakatan</h3>
+                            <a href="{{ url('/blog?category=4') }}" class="more-news-link">More news...</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach ($weeklyNews->take(4) as $newsItem)
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
+                                <div class="single-recent mb-30">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/' . $newsItem->photo) }}" alt="" class="img-fluid card-img-top"
+                                        style="width: 100%; height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="body-cap card-body">
+                                        <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
+                                        <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 40) }}</h4>
+                                        <p class="text-muted small">{{ Str::limit(strip_tags($newsItem->content), 100) }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Kategori Agama --}}
+    <div class="weekly2-news-area weekly2-pading gray-bg">
+        <div class="container">
+            <div class="weekly2-wrapper">
+                <!-- Section Title -->
+                @php
+                    $weeklyNews = App\Models\Berita::where('category_id', 3)->get();
+                @endphp
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-tittle mb-30 d-flex justify-content-between align-items-center">
+                            <h3>Agama</h3>
+                            <a href="{{ url('/blog?category=3') }}" class="more-news-link">More news...</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    @foreach ($weeklyNews->take(4) as $newsItem)
+                        <div class="col-lg-3 col-md-6">
+                            <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
+                                <div class="single-recent mb-30">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/' . $newsItem->photo) }}" alt="" class="img-fluid card-img-top"
+                                        style="width: 100%; height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="body-cap card-body">
+                                        <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
+                                        <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 40) }}</h4>
+                                        <p class="text-muted small">{{ Str::limit(strip_tags($newsItem->content), 100) }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Kategori Edukasi --}}
     <div class="weekly2-news-area weekly2-pading gray-bg">
         <div class="container">
             <div class="weekly2-wrapper">
@@ -79,68 +200,68 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30 d-flex justify-content-between align-items-center">
-                            <h3>Berita Populer</h3>
-                            <a href="{{ url('/more-news') }}">More news...</a>
+                            <h3>Edukasi</h3>
+                            <a href="{{ url('/blog?category=1') }}" class="more-news-link">More news...</a>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     @foreach ($weeklyNews->take(4) as $newsItem)
                         <div class="col-lg-3 col-md-6">
-                            <div class="single-recent mb-30">
-                                <div class="what-img">
-                                    <img src="{{ asset('storage/' . $newsItem->photo) }}" alt="" class="img-fluid"
-                                    style="width: 100%; height: 200px; object-fit: cover;">
+                            <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
+                                <div class="single-recent mb-30">
+                                    <div class="what-img">
+                                        <img src="{{ asset('storage/' . $newsItem->photo) }}" alt="" class="img-fluid card-img-top"
+                                        style="width: 100%; height: 200px; object-fit: cover;">
+                                    </div>
+                                    <div class="body-cap card-body">
+                                        <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
+                                        <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 40) }}</h4>
+                                        <p class="text-muted small">{{ Str::limit(strip_tags($newsItem->content), 100) }}</p>
+                                    </div>
                                 </div>
-                                <div class="body-cap">
-                                    <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
-                                    <h4><a href="{{ url('/detail/' . $newsItem->id) }}">{{ Str::limit($newsItem->name, 40) }}</a></h4>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
-    <!-- Weekly News Area End -->
 
-    <!-- Recent Articles Start -->
-    <div class="recent-articles">
-        <div class="container">
-            <div class="recent-wrapper">
-                <!-- Section Title -->
-                @php
-                    $recentArticles = App\Models\Berita::latest()->take(5)->get();
-                @endphp
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-tittle mb-30">
-                            <h3>Recent Articles</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="recent-active dot-style d-flex">
-                            @foreach ($recentArticles as $article)
-                                <div class="single-recent mb-100">
-                                    <div class="what-img">
-                                        <img src="{{ asset('storage/' . $article->photo) }}" alt="" class="img-fluid"
-                                        style="width: 300px; height: 200px; object-fit: cover;">
-                                    </div>
-                                    <div class="what-cap">
-                                        <h4><a href="{{ url('/detail/' . $article->id) }}">{{ Str::limit($article->name, 40) }}</a></h4>
-                                        <span class="color1">{{ $article->category->name }} - {{ $article->created_at->format('d M Y') }}</span>
-                                        <h6>{{ Str::limit($article->content, 80) }}</h6>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Recent Articles End -->
+    <style>
+        .hover-text {
+            transition: color 0.3s ease;
+        }
+        .hover-text:hover {
+            color: #e74c3c !important;
+        }
+        .more-news-link {
+            font-size: 14px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+        .more-news-link:hover {
+            color: #e74c3c;
+            background-color: rgba(231, 76, 60, 0.1);
+        }
+        .weekly2-news-area {
+            padding: 30px 0 !important;
+        }
+        .weekly2-pading {
+            padding: 30px 0 !important;
+        }
+        /* Hover effect for news items */
+        .trand-right-single:hover h4,
+        .single-recent:hover h4 {
+            color: #e74c3c !important;
+        }
+        /* Add transition for smooth effect */
+        .trand-right-single h4,
+        .single-recent h4 {
+            transition: color 0.3s ease;
+        }
+    </style>
 @endsection

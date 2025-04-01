@@ -25,6 +25,18 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
+    <style>
+        .card {
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body {
+            flex: 1;
+        }
+        .card {
+            height: 100%;
+        }
+    </style>
 
     {{-- <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">

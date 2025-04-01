@@ -16,10 +16,6 @@ class ListPengaduans extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
-    protected function canCreate(): bool
-    {
-        return false;
-    }
 
     protected function getActions(): array
     {

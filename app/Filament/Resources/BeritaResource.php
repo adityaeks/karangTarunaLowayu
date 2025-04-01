@@ -52,7 +52,7 @@ class BeritaResource extends Resource
                         TextInput::make('name')
                             ->label('Judul Berita')
                             ->required()
-                            ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                            ->afterStateUpdated(fn($state, Forms\Set $set) => $set('slug', Str::slug($state))),
 
                         TextInput::make('slug')
                             ->disabled()

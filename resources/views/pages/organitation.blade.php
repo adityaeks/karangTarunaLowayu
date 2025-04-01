@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="about-right mb-90">
-                        <div class="section-tittle mb-30 pt-30">
+                        <div class="section-tittle mb-30 pt-30" style="text-align: center">
                             <h3>Organisasi Kepemudaan</h3>
                         </div>
                         <div class="about-prea">
@@ -21,13 +21,13 @@
                         </div>
                         <div class="row">
                             @foreach ($organisasis as $organisasi)
-                                <div class="col-md-4 mb-4">
+                                <div class="col-md-3 mb-4">
                                     <div class="card">
                                         <img src="{{ asset('storage/' . $organisasi->photo) }}" class="card-img-top"
                                             alt="{{ $organisasi->name }}"
-                                            style="width: 210px; height: 210px; object-fit: cover;">
+                                            style="width: 100%; height: 200px; object-fit: cover;">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $organisasi->name }}</h5>
+                                            <h5 class="card-title" style="text-align: center">{{ $organisasi->name }}</h5>
                                             <p class="card-text">{{ $organisasi->description }}</p>
                                         </div>
                                     </div>

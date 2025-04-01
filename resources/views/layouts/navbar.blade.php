@@ -59,6 +59,7 @@
             </div>
         </div>
 
+
         <!-- Bagian header-bottom dan sticky header -->
         <div class="header-bottom header-sticky">
             <div class="container">
@@ -76,7 +77,7 @@
                             <nav>
                                 <ul id="navigation">
                                     <li><a href="{{ url('/') }}">Home</a></li>
-                                    <li><a href="{{ url('/berita') }}">Berita</a></li>
+                                    <li><a href="{{ url('/blog') }}">Berita</a></li>
                                     <li>
                                         <a href="#">Profil</a>
                                         <ul class="submenu">

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class pengaduan extends Model
 {
     use HasFactory;
+    protected $table = 'pengaduans';
 
     // Field yang diizinkan untuk mass assignment
     protected $fillable = [

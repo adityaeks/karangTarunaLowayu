@@ -17,7 +17,7 @@
                                 @foreach ([
             [
                 'title' => 'Pembina Umum',
-                'content' => 'Kepala Desa Lowayu<br>Ketua BPD Lowayu',
+                'content' => '1. Kepala Desa Lowayu<br>2. Ketua BPD Lowayu',
             ],
             [
                 'title' => 'Pembina Fungsional',
@@ -26,10 +26,10 @@
             [
                 'title' => 'Majelis Pertimbangan',
                 'content' => '<ol>
-                                                            <li>Moh. Adenan Qohar</li>
-                                                            <li>Siswanto</li>
-                                                            <li>Anang Fatihul Huda</li>
-                                                        </ol>',
+                                                                    <li>1. Moh. Adenan Qohar</li>
+                                                                    <li>2. Siswanto</li>
+                                                                    <li>3. Anang Fatihul Huda</li>
+                                                                </ol>',
             ],
         ] as $item)
                                     <div class="col">
@@ -122,7 +122,7 @@
                                     @foreach ([
             [
                 'title' => 'Divisi SDM & Pelatihan',
-                'members' => ['Zainul Mukhtodzim (Koordinator)', 'Emi masruroh', '. Mas Latifah Dwi Suryaning Tyas','. Siti Malicha', 'Nazilatul mahmudah','M. Miftahul Naim','Agustina Rohmawati','Miftahul Huda','Tegar Kusuma Febriansyah','Afrizal Zulkarnain','Melinda Suryani', '. Ahmad Rizal Anshori'],
+                'members' => ['Zainul Mukhtodzim (Koordinator)', 'Emi masruroh', '. Mas Latifah Dwi Suryaning Tyas', '. Siti Malicha', 'Nazilatul mahmudah', 'M. Miftahul Naim', 'Agustina Rohmawati', 'Miftahul Huda', 'Tegar Kusuma Febriansyah', 'Afrizal Zulkarnain', 'Melinda Suryani', '. Ahmad Rizal Anshori'],
             ],
             [
                 'title' => 'Divisi Advokasi & Pemerintahan',
@@ -130,7 +130,7 @@
             ],
             [
                 'title' => 'Divisi Ekonomi Produktif',
-                'members' => ['Muhammad Syuaib (Koordinator)', 'Mohammad Amin', 'Siti Nur Alifah', 'Nisrocha Khofifah', 'Dhabit Firas', 'Febi Ardiansyah', 'Putri Hafizah','Rifdianti Rahma', 'Elliyah Masruroh','Silvia Qotrun Nada'],
+                'members' => ['Muhammad Syuaib (Koordinator)', 'Mohammad Amin', 'Siti Nur Alifah', 'Nisrocha Khofifah', 'Dhabit Firas', 'Febi Ardiansyah', 'Putri Hafizah', 'Rifdianti Rahma', 'Elliyah Masruroh', 'Silvia Qotrun Nada'],
             ],
             [
                 'title' => 'Divisi Media Kreatif',
@@ -202,6 +202,7 @@
     <style>
         .org-structure {
             transition: transform 0.3s ease;
+            height: 100%;
         }
 
         .org-structure:hover {
@@ -211,6 +212,7 @@
         .department-card {
             background-color: #f8f9fa;
             border-left: 4px solid #97240f;
+            height: 100%;
         }
 
         .section-tittle h3 {
@@ -220,6 +222,24 @@
 
         .text-primary {
             color: #97240f !important;
+        }
+
+        /* Menyamakan tinggi row */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .col-md-4, .col-md-6 {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .col {
+            display: flex;
+            flex-direction: column;
         }
     </style>
 @endsection

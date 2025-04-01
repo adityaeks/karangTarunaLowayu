@@ -67,19 +67,21 @@ class PengaduanResource extends Resource
                         return '+62' . ltrim($record->number, '0');
                     }),
                 TextColumn::make('content')
-                    ->label('Pesan Pengaduan'),
+                    ->label('Pesan Pengaduan')
+                    ->limit(50),
+                TextColumn::make('created_at')
+                    ->label('Tanggal Pengaduan')
+                    ->dateTime('d M Y')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                //
+                Tables\Actions\ViewAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->bulkActions([])
+            ->selectable(false);
     }
 
     public static function getRelations(): array
@@ -93,6 +95,8 @@ class PengaduanResource extends Resource
     {
         return [
             'index' => Pages\ListPengaduans::route('/'),
+            'create' => Pages\CreatePengaduan::route('/create'),
+            'view' => Pages\ViewPengaduan::route('/{record}'),
         ];
     }
 }

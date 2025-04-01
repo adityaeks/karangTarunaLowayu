@@ -4,17 +4,26 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Berita;
 use App\Models\Organisasi;
 use App\Http\Controllers\PengaduanController;
+use App\Models\Category;
 
 Route::get('/', function () {
     return view('pages.index');
 });
-Route::get('/berita', function () {
-    $news = Berita::latest()->paginate(5);
-    return view('pages.blog', compact('news'));
+Route::get('/blog', function () {
+    $query = Berita::query();
+
+    if (request('category')) {
+        $query->where('category_id', request('category'));
+    }
+
+    $news = $query->latest()->paginate(9);
+    $categories = Category::all();
+
+    return view('pages.blog', compact('news', 'categories'));
 });
 
-Route::get('/detail/{id}', function ($id) {
-    $news = Berita::findOrFail($id);
+Route::get('/detail/{slug}', function ($slug) {
+    $news = Berita::where('slug', $slug)->firstOrFail();
     return view('pages.blog-detail', compact('news'));
 });
 
@@ -33,7 +42,8 @@ Route::get('/search', function () {
     } else {
         $news = Berita::latest()->paginate(5);
     }
-    return view('pages.blog', compact('news'));
+    $categories = Category::all();
+    return view('pages.blog', compact('news', 'categories'));
 });
 
 Route::get('/about', function () {
@@ -51,11 +61,7 @@ Route::get('/organisasi', function () {
 });
 Route::get('/pengaduan', function () {
     return view('pages.complaint');
-});
-// Ganti route pengaduan menjadi:
-Route::get('/pengaduan', function () {
-    return view('pages.complaint');
-})->name('pengaduan.form'); // Tambahkan nama route
+})->name('pengaduan.form');
 
 // Route::post('/pengaduan/store', [PengaduanController::class, 'store'])
 //     ->name('pengaduan.store');

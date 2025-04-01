@@ -62,7 +62,7 @@
                     </div>
                 @endif
                 <form class="form-contact contact_form" action="{{ route('pengaduan.store') }}" method="post"
-                    id="contactForm" enctype="multipart/form-data" novalidate="novalidate">
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -84,7 +84,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="bukti_pengaduan">Bukti Pengaduan</label>
-                                <input class="form-control" name="file" id="file" type="file"
+                                <input class="form-control" name="bukti_pengaduan" id="bukti_pengaduan" type="file"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Upload File'"
                                     placeholder="Upload File">
                             </div>
@@ -93,11 +93,10 @@
                             <div class="form-group">
                                 <label for="content">Pesan Pengaduan</label>
                                 <textarea class="form-control w-100" name="content" id="content" cols="30" rows="9"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder=" Enter Message"></textarea>
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Message'" placeholder="Enter Message"></textarea>
                             </div>
                         </div>
                     </div>
-                    {{-- <button type="submit">Kirim</button> --}}
                     <div class="form-group mt-3">
                         <button type="submit" class="button button-contactForm boxed-btn">Send</button>
                     </div>

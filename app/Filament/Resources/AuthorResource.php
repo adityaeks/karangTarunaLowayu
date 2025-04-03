@@ -21,8 +21,8 @@ class AuthorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-pencil';
     protected static ?string $navigationLabel = 'Penulis';
-    protected static ?string $navigationGroup = 'Kelola Website';
     protected static ?string $pluralLabel = 'Penulis';
+    protected static ?string $navigationGroup = 'Kelola Website';
     protected static ?string $label = 'Penulis';
 
     public static function form(Form $form): Form

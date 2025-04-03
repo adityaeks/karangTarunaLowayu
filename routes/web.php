@@ -5,6 +5,7 @@ use App\Models\Berita;
 use App\Models\Organisasi;
 use App\Http\Controllers\PengaduanController;
 use App\Models\Category;
+use Filament\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -18,32 +19,41 @@ Route::get('/blog', function () {
 
     $news = $query->latest()->paginate(9);
     $categories = Category::all();
+    $totalNewsCount = Berita::count(); // Calculate total count of all news items
 
-    return view('pages.blog', compact('news', 'categories'));
+    return view('pages.blog', compact('news', 'categories', 'totalNewsCount'));
 });
 
-Route::get('/detail/{slug}', function ($slug) {
-    $news = Berita::where('slug', $slug)->firstOrFail();
-    return view('pages.blog-detail', compact('news'));
-});
+Route::get('/detail/{slug}', [\App\Http\Controllers\BeritaController::class, 'show'])->name('blog.detail');
 
 Route::get('/search', function () {
     $query = request('query');
+    $category = request('category');
+
+    $newsQuery = Berita::query();
+
     if ($query) {
-        $news = Berita::where('slug', 'LIKE', "%{$query}%")
-            ->orWhere('name', 'LIKE', "%{$query}%")
-            ->orWhereHas('author', function ($q) use ($query) {
-                $q->where('name', 'LIKE', "%{$query}%");
-            })
-            ->orWhereHas('category', function ($q) use ($query) {
-                $q->where('name', 'LIKE', "%{$query}%");
-            })
-            ->paginate(10);
-    } else {
-        $news = Berita::latest()->paginate(5);
+        $newsQuery->where(function ($q) use ($query) {
+            $q->where('slug', 'LIKE', "%{$query}%")
+                ->orWhere('name', 'LIKE', "%{$query}%")
+                ->orWhereHas('author', function ($q) use ($query) {
+                    $q->where('name', 'LIKE', "%{$query}%");
+                })
+                ->orWhereHas('category', function ($q) use ($query) {
+                    $q->where('name', 'LIKE', "%{$query}%");
+                });
+        });
     }
+
+    if ($category) {
+        $newsQuery->where('category_id', $category);
+    }
+
+    $news = $newsQuery->paginate(10);
     $categories = Category::all();
-    return view('pages.blog', compact('news', 'categories'));
+    $totalNewsCount = Berita::count(); // Calculate total count of all news items
+
+    return view('pages.blog', compact('news', 'categories', 'totalNewsCount'));
 });
 
 Route::get('/about', function () {

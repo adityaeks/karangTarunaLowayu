@@ -17,6 +17,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Twilio\Rest\Client; // Add this import for Twilio
+use Filament\Tables\Filters\Filter;
 
 class PengaduanResource extends Resource
 {
@@ -65,7 +67,8 @@ class PengaduanResource extends Resource
                 TextColumn::make('number')
                     ->getStateUsing(function ($record) {
                         return '+62' . ltrim($record->number, '0');
-                    }),
+                    })
+                    ->limit(12),
                 TextColumn::make('content')
                     ->label('Pesan Pengaduan')
                     ->limit(50),
@@ -75,13 +78,30 @@ class PengaduanResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                Filter::make('created_at')
+                    ->label('Tanggal Pengaduan')
+                    ->form([
+                        Forms\Components\DatePicker::make('created_from')
+                            ->label('Dari Tanggal'),
+                        Forms\Components\DatePicker::make('created_until')
+                            ->label('Sampai Tanggal'),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        return $query
+                            ->when($data['created_from'] ?? null, fn ($query, $date) => $query->whereDate('created_at', '>=', $date))
+                            ->when($data['created_until'] ?? null, fn ($query, $date) => $query->whereDate('created_at', '<=', $date));
+                    }),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([])
             ->selectable(false);
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 
     public static function getRelations(): array
@@ -95,7 +115,6 @@ class PengaduanResource extends Resource
     {
         return [
             'index' => Pages\ListPengaduans::route('/'),
-            'create' => Pages\CreatePengaduan::route('/create'),
             'view' => Pages\ViewPengaduan::route('/{record}'),
         ];
     }

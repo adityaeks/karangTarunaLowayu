@@ -14,7 +14,7 @@
     .sticky-logo .nav-link {
         font-size: 21px;
         /* Sama dengan teks menu navigasi */
-        color: #97240f;
+        color: #e74c3c;
         /* Sesuaikan dengan warna teks menu navigasi */
         font-weight: 700;
         /* Sama dengan teks menu navigasi */

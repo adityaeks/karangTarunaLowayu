@@ -92,14 +92,13 @@ class BeritaResource extends Resource
                 ImageColumn::make('photo')->label('Thumbnail'),
                 TextColumn::make('published_at')->label('Date'), // Add this line
                 TextColumn::make('name')->label('Title')
-                ->limit(15),
+                ->limit(30),
                 TextColumn::make('author.name')->label('Author'),
                 TextColumn::make('category.name')->label('Category'),
-                TextColumn::make('content')
-                    ->limit(30), // Limit the text to 50 characters
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(), // Add this line
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -121,6 +120,7 @@ class BeritaResource extends Resource
             'index' => Pages\ListBeritas::route('/'),
             'create' => Pages\CreateBerita::route('/create'),
             'edit' => Pages\EditBerita::route('/{record}/edit'),
+            'view' => Pages\ViewBerita::route('/{record}'), // Add this line
         ];
     }
 }

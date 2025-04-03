@@ -57,12 +57,14 @@ class PengaduanResource extends Resource
             ->columns([
                 TextColumn::make('index')
                     ->label('No')
-                    ->getStateUsing(function ($rowLoop, $record) {
-                        return $rowLoop->iteration;
+                    ->getStateUsing(function ($rowLoop, $record, $table) {
+                        $totalRecords = $table->getRecords()->count();
+                        return $totalRecords - $rowLoop->iteration + 1;
                     }),
-                ImageColumn::make('bukti_pengaduan')
-                    ->label('Bukti Pengaduan')
-                    ->disk('public'),
+                TextColumn::make('created_at')
+                    ->label('Tanggal')
+                    ->dateTime('d M Y')
+                    ->sortable(),
                 TextColumn::make('name'),
                 TextColumn::make('number')
                     ->getStateUsing(function ($record) {
@@ -72,10 +74,14 @@ class PengaduanResource extends Resource
                 TextColumn::make('content')
                     ->label('Pesan Pengaduan')
                     ->limit(50),
-                TextColumn::make('created_at')
-                    ->label('Tanggal Pengaduan')
-                    ->dateTime('d M Y')
-                    ->sortable(),
+                TextColumn::make('bukti_pengaduan')
+                    ->label('Bukti')
+                    ->getStateUsing(function ($record) {
+                        return $record->bukti_pengaduan ? 'Ada' : 'Tidak';
+                    })
+                    ->color(function ($state) {
+                        return $state === 'Ada' ? 'success' : 'danger';
+                    }),
             ])
             ->filters([
                 Filter::make('created_at')
@@ -96,7 +102,8 @@ class PengaduanResource extends Resource
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([])
-            ->selectable(false);
+            ->selectable(false)
+            ->defaultSort('created_at', 'desc'); // Add this line to sort by newest
     }
 
     public static function canCreate(): bool

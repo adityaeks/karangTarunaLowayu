@@ -20,8 +20,8 @@ class AdsResource extends Resource
     protected static ?string $model = Ads::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
-    protected static ?string $navigationLabel = 'Iklan';
-    protected static ?string $pluralLabel = 'Iklan';
+    protected static ?string $navigationLabel = 'Promosi';
+    protected static ?string $pluralLabel = 'Promosi';
 
     public static function form(Form $form): Form
     {

@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-lg-8">
                         <!-- Head Topic -->
-                        <div class="trending-top mb-30 position-relative">
+                        <div class="trending-top mb-30 position-relative mt-20">
                             <div class="trending2-wrapper">
                                 @if ($sliderImages->count() > 0)
                                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -50,20 +50,24 @@
 
                     </div>
                     <!-- Right Content -->
-                    <div class="col-lg-4">
+                    <div class="col-lg-4 mt-20">
                         @if ($news->count() > 0)
-                            @foreach ($news->take(4) as $item)
+                            @foreach ($news->take(5) as $item)
                                 <a href="{{ url('/detail/' . $item->slug) }}" class="text-decoration-none d-block">
-                                    <div class="trand-right-single d-flex mb-3">
-                                        <div class="trand-right-img" style="width: 180px; height: 100px; overflow: hidden;">
-                                            <img src="{{ asset('storage/' . $item->photo) }}" alt=""
-                                                class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
-                                        </div>
-                                        <div class="trand-right-cap" style="flex: 1; margin-left: 15px;">
-                                            <h4 class="text-dark hover-text">{{ Str::limit($item->name, 30) }}</h4>
-                                            <span class="color1"
-                                                style="margin-top: -10px;">{{ $item->created_at->format('d/m/Y') }}</span>
-                                            {{-- <p class="small text-muted mt-1">{{ Str::limit(strip_tags($item->content), 30) }}</p> --}}
+                                    <div class="card mb-3 hover-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; height: 100px; border-bottom: 2px solid red;">
+                                        <div class="row no-gutters d-flex" style="height: 100%; flex-wrap: nowrap;">
+                                            <div class="col-4" style="overflow: hidden; height: 100%;">
+                                                <img src="{{ asset('storage/' . $item->photo) }}" alt=""
+                                                    class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="card-body" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                                    <h5 class="card-title text-dark">{{ Str::limit($item->name, 30) }}</h5>
+                                                    <p class="card-text">
+                                                        <small class="text-muted">{{ $item->created_at->format('d/m/Y') }}</small>
+                                                    </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </a>
@@ -124,7 +128,8 @@
                                         <div class="body-cap card-body">
                                             <span class="color1"
                                                 style="margin-top: -10px;">{{ $newsItem->created_at->format('d M Y') }}</span>
-                                            <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 50) }}
+                                            <h4 class="card-title text-dark hover-text">
+                                                {{ Str::limit($newsItem->name, 50) }}
                                             </h4>
                                         </div>
                                     </div>
@@ -171,7 +176,8 @@
                                         <div class="body-cap card-body">
                                             <span class="color1"
                                                 style="margin-top: -10px;">{{ $newsItem->created_at->format('d M Y') }}</span>
-                                            <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 50) }}
+                                            <h4 class="card-title text-dark hover-text">
+                                                {{ Str::limit($newsItem->name, 50) }}
                                             </h4>
                                         </div>
                                     </div>
@@ -217,7 +223,8 @@
                                         </div>
                                         <div class="body-cap card-body">
                                             <span class="color1">{{ $newsItem->created_at->format('d M Y') }}</span>
-                                            <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 50) }}
+                                            <h4 class="card-title text-dark hover-text">
+                                                {{ Str::limit($newsItem->name, 50) }}
                                             </h4>
                                         </div>
                                     </div>
@@ -264,7 +271,8 @@
                                         <div class="body-cap card-body">
                                             <span class="color1"
                                                 style="margin-top: -10px;">{{ $newsItem->created_at->format('d M Y') }}</span>
-                                            <h4 class="card-title text-dark hover-text">{{ Str::limit($newsItem->name, 50) }}
+                                            <h4 class="card-title text-dark hover-text">
+                                                {{ Str::limit($newsItem->name, 50) }}
                                             </h4>
                                         </div>
                                     </div>
@@ -351,7 +359,8 @@
         }
 
         .single-recent .card-title {
-            font-size: 20px; /* Adjusted font size for category names */
+            font-size: 20px;
+            /* Adjusted font size for category names */
         }
 
         .ad-responsive {
@@ -371,6 +380,10 @@
                 height: 250px;
                 object-fit: cover;
             }
+        }
+
+        .hover-card:hover .card-title {
+            color: #e74c3c !important;
         }
     </style>
 @endsection

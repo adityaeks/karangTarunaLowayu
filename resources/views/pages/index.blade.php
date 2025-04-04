@@ -26,7 +26,7 @@
                                         <div class="carousel-inner">
                                             @foreach ($sliderImages as $index => $image)
                                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                    <img src="{{ asset('storage/' . $image->photo) }}" class="d-block w-100"
+                                                    <img src="{{ asset('storage/' . $image->photo) }}" class="d-block w-100" style="height: 500px; object-fit: cover;"
                                                         alt="Slider Image">
                                                 </div>
                                             @endforeach
@@ -384,6 +384,13 @@
 
         .hover-card:hover .card-title {
             color: #e74c3c !important;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-inner img {
+                height: 250px !important;
+                object-fit: cover;
+            }
         }
     </style>
 @endsection

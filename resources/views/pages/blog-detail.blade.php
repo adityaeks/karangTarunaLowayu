@@ -106,14 +106,8 @@
                                 class="color1">{{ $news->category->name }}</span>
                             <h3>{{ $news->name }}</h3>
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"
-                                    style="width: 16px; height: 16px; margin-left: 10px; vertical-align: middle;">
-                                    <path
-                                        d="M12 4.5C7.305 4.5 3.135 7.364 1.5 12c1.635 4.636 5.805 7.5 10.5 7.5s8.865-2.864 10.5-7.5C20.865 7.364 16.695 4.5 12 4.5zm0 12c-2.485 0-4.5-2.015-4.5-4.5S9.515 7.5 12 7.5s4.5 2.015 4.5 4.5-2.015 4.5-4.5 4.5zm0-7.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
-                                    <span
-                                        style="font-size: 0.9rem; color: #666; margin-left: 5px;">{{ $views }} |</span>
-                                </svg>
                                 {{ $news->author->name }} - {{ $news->created_at->format('d M Y') }}
+
                             </span>
                         </div>
                         <div class="about-prea">

@@ -22,9 +22,9 @@ class BeritaController extends Controller
         // Simpan views per hari secara global
         $today = now()->format('Y-m-d');
         $viewsKey = "blog:views:daily:{$today}";
-        $views = Redis::incr($viewsKey);
+        // $views = Redis::incr($viewsKey);
 
-        return view('pages.blog-detail', compact('news', 'views', 'relatedNews'));
+        return view('pages.blog-detail', compact('news',  'relatedNews'));
     }
 
 }

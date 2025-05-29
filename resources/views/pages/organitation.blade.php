@@ -21,11 +21,11 @@
                         </div>
                         <div class="row">
                             @foreach ($organisasis as $organisasi)
-                                <div class="col-md-3 mb-4">
+                                <div class="col-md-3 col-6 mb-4">
                                     <div class="card">
-                                        <img src="{{ asset('storage/' . $organisasi->photo) }}" class="card-img-top"
+                                        <img src="{{ asset('uploads/' . $organisasi->photo) }}" class="card-img-top"
                                             alt="{{ $organisasi->name }}"
-                                            style="width: 100%; height: 200px; object-fit: cover;">
+                                            style="width: 100%; height: 100%; object-fit: cover;">
                                         <div class="card-body">
                                             <h5 class="card-title" style="text-align: center">{{ $organisasi->name }}</h5>
                                             <p class="card-text">{{ $organisasi->description }}</p>

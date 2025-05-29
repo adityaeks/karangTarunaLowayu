@@ -47,6 +47,8 @@ class PengaduanResource extends Resource
 
                 FileUpload::make('bukti_pengaduan')
                     ->label('Bukti Pengaduan')
+                    ->disk('public_uploads') // custom disk ke public/uploads
+                    ->directory('pengaduan_files')
                     ->required(),
             ]);
     }

@@ -26,10 +26,20 @@ class PengaduanController extends Controller
 
             // Handle file upload
             $filePath = null;
-            if($request->hasFile('bukti_pengaduan')) {
-                $filePath = $request->file('bukti_pengaduan')->store('pengaduan_files', 'public');
-                \Log::info('File uploaded successfully:', ['path' => $filePath]);
+            if ($request->hasFile('bukti_pengaduan')) {
+                $file = $request->file('bukti_pengaduan');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('uploads/pengaduan_files');
+
+                // Pastikan foldernya ada
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                $file->move($destinationPath, $filename);
+                $filePath = 'uploads/pengaduan_files/' . $filename;
             }
+
 
             // Simpan ke database
             $pengaduan = Pengaduan::create([

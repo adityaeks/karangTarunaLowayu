@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\berita;
+use App\Models\Berita;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
 
 class BeritaController extends Controller
 {

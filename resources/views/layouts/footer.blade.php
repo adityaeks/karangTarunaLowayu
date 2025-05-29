@@ -9,15 +9,14 @@
                     </div>
                     <div class="footer-tittle">
                         <div class="footer-pera">
-                            <p>Karang Taruna Desa Lowayu adalah organisasi kepemudaan yang berperan dalam pengembangan
-                                potensi generasi muda serta peningkatan kesejahteraan sosial di desa.</p>
+                            <p>Karang Taruna Lowayu adalah organisasi kepemudaan di Desa Lowayu yang menjadi wadah bagi generasi muda untuk mengembangkan diri melalui kegiatan sosial, ekonomi, budaya, dan olahraga, serta berperan aktif dalam pembangunan desa.</p>
                         </div>
                     </div>
                     <!-- Social -->
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <!--<a href="#"><i class="fab fa-twitter"></i></a>-->
+                        <a href="https://www.instagram.com/galow.tunas.bangsa"><i class="fab fa-instagram"></i></a>
+                        <!--<a href="#"><i class="fab fa-pinterest-p"></i></a>-->
                     </div>
                 </div>
             </div>

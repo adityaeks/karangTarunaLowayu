@@ -31,6 +31,7 @@ class SliderResource extends Resource
                 FileUpload::make('photo')
                     ->label('Banner')
                     ->image()
+                    ->disk('public_uploads') // custom disk
                     ->directory('sliders') // Direktori penyimpanan
                     ->required(),
             ]);
@@ -41,7 +42,8 @@ class SliderResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('photo')
-                    ->label('Banner'),
+                    ->label('Banner')
+                    ->disk('public_uploads'),
             ])
             ->filters([
                 //

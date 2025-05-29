@@ -26,7 +26,7 @@
                                         <div class="carousel-inner">
                                             @foreach ($sliderImages as $index => $image)
                                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                    <img src="{{ asset('storage/' . $image->photo) }}" class="d-block w-100" style="height: 500px; object-fit: cover;"
+                                                    <img src="{{ asset('uploads/' . $image->photo) }}" class="d-block w-100" style="height: 500px; object-fit: cover;"
                                                         alt="Slider Image">
                                                 </div>
                                             @endforeach
@@ -57,7 +57,7 @@
                                     <div class="card mb-3 hover-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; height: 100px; border-bottom: 2px solid red;">
                                         <div class="row no-gutters d-flex" style="height: 100%; flex-wrap: nowrap;">
                                             <div class="col-4" style="overflow: hidden; height: 100%;">
-                                                <img src="{{ asset('storage/' . $item->photo) }}" alt=""
+                                                <img src="{{ asset('uploads/' . $item->photo) }}" alt=""
                                                     class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                             </div>
                                             <div class="col-8">
@@ -88,7 +88,7 @@
             $adBanner = App\Models\Ads::latest()->first();
         @endphp
         @if ($adBanner)
-            <img src="{{ asset('storage/' . $adBanner->photo) }}" alt="{{ $adBanner->title }}"
+            <img src="{{ asset('uploads/' . $adBanner->photo) }}" alt="{{ $adBanner->title }}"
                 class="img-fluid ad-responsive">
         @else
             <p>No advertisement available.</p>
@@ -121,7 +121,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -169,7 +169,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -217,7 +217,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -264,7 +264,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>

@@ -192,7 +192,7 @@
                                     <a href="{{ url('/detail/' . $item->slug) }}" class="blog-link">
                                         <article class="blog_item">
                                             <div class="blog_item_img">
-                                                <img class="card-img rounded-0" src="{{ asset('storage/' . $item->photo) }}"
+                                                <img class="card-img rounded-0" src="{{ asset('uploads/' . $item->photo) }}"
                                                     alt="{{ $item->name }}">
                                             </div>
 

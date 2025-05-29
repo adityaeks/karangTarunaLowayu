@@ -9,7 +9,6 @@ use App\Models\Ads;
 class EditAds extends EditRecord
 {
     protected static string $resource = AdsResource::class;
-
     public function mount($record = null): void
     {
         $record ??= Ads::query()->first()?->id;

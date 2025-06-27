@@ -5,11 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 
+
 class BeritaController extends Controller
 {
     public function show($slug)
     {
+            // dd(request()->ip());
+
         $news = Berita::where('slug', $slug)->with('category', 'author')->firstOrFail();
+
+        // views($news)->record();
+        
+        // ini yang view per ip
+        $ip = request()->ip();
+        $cacheKey = 'viewed_'.$news->id.'_by_'.$ip;  // cache key spesifik per berita dan IP
+        
+        if (!cache()->has($cacheKey)) {
+            views($news)->record();
+            cache()->put($cacheKey, true, now()->addHour());
+        }
+
 
         // Ambil berita terkait dari kategori yang sama
         $relatedNews = Berita::where('category_id', $news->category_id)

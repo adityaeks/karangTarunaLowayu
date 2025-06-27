@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PengaduanMail;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;  // ← import
+
 
 class PengaduanController extends Controller
 {
@@ -48,6 +51,9 @@ class PengaduanController extends Controller
                 'content' => $validated['content'],
                 'bukti_pengaduan' => $filePath,
             ]);
+            
+            $toEmail = 'galowtunasbangsa@gmail.com';
+            Mail::to($toEmail)->send(new PengaduanMail($pengaduan));
 
             \Log::info('Pengaduan saved successfully:', ['id' => $pengaduan->id]);
 

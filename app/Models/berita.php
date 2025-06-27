@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 
-class Berita extends Model
+class Berita extends Model implements Viewable
 {
     use HasFactory;
+    use InteractsWithViews;
 
     // Field yang diizinkan untuk mass assignment
     protected $fillable = [
@@ -16,6 +19,8 @@ class Berita extends Model
         'content',
         'published_at',
         'slug',
+        'category_id',
+        'author_id',
     ];
 
     public function author()

@@ -67,9 +67,9 @@
                     <div class="col-xl-10 col-lg-10 col-md-12 header-flex">
                         <!-- Sticky Logo dengan teks di samping icon -->
                         <div class="sticky-logo">
-                            <a href="{{ url('/') }}" class="d-flex align-items-center text-decoration-none">
-                                <img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" alt="Logo" style="width: 40px; height: auto;">
-                                <span class="nav-link">Karang Taruna Lowayu</span>
+                            <a href="{{ url('/') }}" class="d-flex align-items-center text-decoration-none" style="height:50px">
+                                <img src="{{ asset('assets/img/logo/logo-utama-header.png') }}" alt="Logo" style="width: 120px; height: auto;">
+                                <!--<span class="nav-link"> </span>-->
                             </a>
                         </div>
                         <!-- Main-menu -->
@@ -79,14 +79,14 @@
                                     <li><a href="{{ url('/') }}">Home</a></li>
                                     <li><a href="{{ url('/blog') }}">Berita</a></li>
                                     <li>
-                                        <a href="#">Profil</a>
+                                        <a href="#">Tentang Galow</a>
                                         <ul class="submenu">
-                                            <li><a href="{{ url('/about') }}">Tentang</a></li>
+                                            <li><a href="{{ url('/about') }}">Profil</a></li>
                                             <li><a href="{{ url('/structur') }}">Struktur</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="{{ url('/organisasi') }}">Organisasi Kepemudaan</a></li>
-                                    <li><a href="{{ url('/pengaduan') }}">Pengaduan</a></li>
+                                    <li><a href="{{ url('/Halo!.GALOW.Pengaduan') }}">Halo! GALOW Pengaduan</a></li>
                                 </ul>
                             </nav>
                         </div>

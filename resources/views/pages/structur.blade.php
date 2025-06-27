@@ -7,8 +7,8 @@
                 <div class="col-lg-12">
                     <div class="about-right mb-90">
                         <div class="section-tittle mb-30 pt-30 text-center">
-                            <h3 style="font-size: 18px;">SUSUNAN PENGURUS <br> KARANG TARUNA "GALOW TUNAS BANGSA" <br> DESA
-                                LOWAYU KECAMATAN DUKUN KABUPATEN GRESIK <br> PERIODE 2024-2027 </h3>
+                            <h5 style="font-size: 18px;">SUSUNAN PENGURUS <br> KARANG TARUNA "GALOW TUNAS BANGSA" <br> DESA
+                                LOWAYU KECAMATAN DUKUN KABUPATEN GRESIK <br> PERIODE 2024-2027 </h5>
                         </div>
 
                         <div class="about-prea">

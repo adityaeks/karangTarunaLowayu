@@ -43,7 +43,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">Pengaduan</h2>
+                <h2 class="contact-title">Halo! GALOW Pengaduan</h2>
             </div>
             <div class="col-lg-8">
                 @if (session('success'))

@@ -3741,7 +3741,7 @@ hr {
 }
 
 .footer-area {
-    background: #100f0f
+    background: #ba2d11
 }
 
 .footer-area .footer-logo {
@@ -3749,7 +3749,7 @@ hr {
 }
 
 .footer-area .footer-pera p {
-    color: #a8a8a8;
+    color: #d3d3d3;
     font-size: 15px;
     margin-bottom: 50px;
     line-height: 1.8
@@ -3768,7 +3768,7 @@ hr {
 }
 
 .footer-area .footer-tittle p {
-    color: #a8a8a8
+    color: #cdcdcd
 }
 
 .footer-area .footer-tittle ul li {
@@ -3819,8 +3819,8 @@ hr {
 }
 
 .footer-area .footer-social a i {
-    color: #222222;
-    margin-right: 12px;
+    color: #cdcdcd;
+    margin-right: 20px;
     font-size: 19px;
     -webkit-transition: all .4s ease-out 0s;
     -moz-transition: all .4s ease-out 0s;
@@ -3855,11 +3855,11 @@ hr {
 }
 
 .footer-bottom-area {
-    background: #100f0f
+    background: #ba2d11
 }
 
 .footer-bottom-area .footer-border {
-    border-top: 1px solid #242323;
+    border-top: 1px solid #ba2d11;
     padding: 40px 0px 23px
 }
 
@@ -3870,7 +3870,7 @@ hr {
 }
 
 .footer-bottom-area .footer-copy-right p {
-    color: #838383;
+    color: #cdcdcd;
     font-weight: 300;
     font-size: 16px;
     line-height: 2;

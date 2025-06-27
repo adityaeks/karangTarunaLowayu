@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
+use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
@@ -43,6 +44,8 @@ class BeritaResource extends Resource
                         FileUpload::make('photo')
                             ->label('Thumbnail')
                             ->image()
+                            ->disk('public_uploads') // custom disk ke public/uploads
+                            ->directory('berita')
                             ->required(),
                     ])
                     ->collapsible(),
@@ -61,9 +64,12 @@ class BeritaResource extends Resource
                             ->maxLength(255)
                             ->unique(Berita::class, 'slug', ignoreRecord: true),
 
-                        MarkdownEditor::make('content')
+                        TinyEditor::make('content')
+                            ->label('Konten Berita')
                             ->required()
-                            ->columnSpan('full'),
+                            ->columnSpan('full')
+                            ->profile('default'),
+                        // …field lain…
 
                         Select::make('author_id')
                             ->label('Author')
@@ -89,12 +95,17 @@ class BeritaResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('photo')->label('Thumbnail'),
-                TextColumn::make('published_at')->label('Date'), // Add this line
+                ImageColumn::make('photo')
+                    ->label('Thumbnail')
+                    ->getStateUsing(fn ($record) => asset('uploads/' . $record->photo)),
+                TextColumn::make('published_at')->label('Date'),
                 TextColumn::make('name')->label('Title')
-                ->limit(30),
+                    ->limit(30),
                 TextColumn::make('author.name')->label('Author'),
                 TextColumn::make('category.name')->label('Category'),
+                Tables\Columns\TextColumn::make('views_count')
+                    ->label('Total Views')
+                    ->getStateUsing(fn(Berita $record) => $record->views()->count()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

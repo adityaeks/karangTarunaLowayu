@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PengaduanMail;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;  // ← import
+
 
 class PengaduanController extends Controller
 {
@@ -26,10 +29,20 @@ class PengaduanController extends Controller
 
             // Handle file upload
             $filePath = null;
-            if($request->hasFile('bukti_pengaduan')) {
-                $filePath = $request->file('bukti_pengaduan')->store('pengaduan_files', 'public');
-                \Log::info('File uploaded successfully:', ['path' => $filePath]);
+            if ($request->hasFile('bukti_pengaduan')) {
+                $file = $request->file('bukti_pengaduan');
+                $filename = time() . '_' . $file->getClientOriginalName();
+                $destinationPath = public_path('uploads/pengaduan_files');
+
+                // Pastikan foldernya ada
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                $file->move($destinationPath, $filename);
+                $filePath = 'uploads/pengaduan_files/' . $filename;
             }
+
 
             // Simpan ke database
             $pengaduan = Pengaduan::create([
@@ -38,6 +51,9 @@ class PengaduanController extends Controller
                 'content' => $validated['content'],
                 'bukti_pengaduan' => $filePath,
             ]);
+            
+            $toEmail = 'galowtunasbangsa@gmail.com';
+            Mail::to($toEmail)->send(new PengaduanMail($pengaduan));
 
             \Log::info('Pengaduan saved successfully:', ['id' => $pengaduan->id]);
 

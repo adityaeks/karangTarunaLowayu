@@ -18,11 +18,12 @@ class ViewPengaduan extends ViewRecord
 
     protected function getActions(): array
     {
+        // dd($this->record->bukti_pengaduan);
         return [
             // Add a custom action to download the evidence file
             \Filament\Pages\Actions\Action::make('download')
                 ->label('Download Bukti Pengaduan')
-                ->url(fn () => $this->record->bukti_pengaduan ? asset('storage/' . $this->record->bukti_pengaduan) : null)
+                ->url(fn () => $this->record->bukti_pengaduan ? asset($this->record->bukti_pengaduan) : null)
                 ->openUrlInNewTab()
                 ->disabled(fn () => is_null($this->record->bukti_pengaduan)),
         ];

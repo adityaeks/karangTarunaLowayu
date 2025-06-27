@@ -14,6 +14,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Redirect;
+use Filament\Facades\Filament;
 
 class AdsResource extends Resource
 {
@@ -23,6 +25,22 @@ class AdsResource extends Resource
     protected static ?string $navigationLabel = 'Promosi';
     protected static ?string $pluralLabel = 'Promosi';
 
+    public static function boot(): void
+    {
+        parent::boot();
+
+        Filament::serving(function () {
+            if (request()->is('admin/ads')) {
+                $adsCount = Ads::count();
+                if ($adsCount === 1) {
+                    $ads = Ads::first();
+                    Redirect::to(static::getUrl('edit', ['record' => $ads->id]))->send();
+                    exit;
+                }
+            }
+        });
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -30,6 +48,8 @@ class AdsResource extends Resource
                 Forms\Components\Grid::make(1) // Single-column grid
                     ->schema([
                         FileUpload::make('photo')
+                            ->disk('public_uploads') // custom disk ke public/uploads
+                            ->directory('ads')
                             ->required()
                             ->image()
                             ->columnSpan('full'), // Full width
@@ -44,7 +64,8 @@ class AdsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('photo'),
+                Tables\Columns\ImageColumn::make('photo')
+                    ->disk('public_uploads'),
                 Tables\Columns\TextColumn::make('title'),
             ])
             ->filters([

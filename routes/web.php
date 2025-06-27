@@ -6,6 +6,8 @@ use App\Models\Organisasi;
 use App\Http\Controllers\PengaduanController;
 use App\Models\Category;
 use Filament\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 Route::get('/', function () {
     return view('pages.index');
@@ -69,11 +71,17 @@ Route::get('/organisasi', function () {
     $organisasis = Organisasi::all();
     return view('pages.organitation', compact('organisasis'));
 });
-Route::get('/pengaduan', function () {
+Route::get('/Halo!.GALOW.Pengaduan', function () {
     return view('pages.complaint');
 })->name('pengaduan.form');
 
 // Route::post('/pengaduan/store', [PengaduanController::class, 'store'])
 //     ->name('pengaduan.store');
 
-Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::post('/Halo!.GALOW.Pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+
+
+Route::get('/test-mail', function () {
+    Mail::to('penerima@contoh.com')->send(new TestMail);
+    return '✔️ Email berhasil dikirim!';
+});

@@ -26,7 +26,7 @@
                                         <div class="carousel-inner">
                                             @foreach ($sliderImages as $index => $image)
                                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                    <img src="{{ asset('storage/' . $image->photo) }}" class="d-block w-100" style="height: 500px; object-fit: cover;"
+                                                    <img src="{{ asset('uploads/' . $image->photo) }}" class="d-block w-100" style="height: 500px; object-fit: cover;"
                                                         alt="Slider Image">
                                                 </div>
                                             @endforeach
@@ -52,12 +52,12 @@
                     <!-- Right Content -->
                     <div class="col-lg-4 mt-20">
                         @if ($news->count() > 0)
-                            @foreach ($news->take(5) as $item)
+                            @foreach ($news->take(4) as $item)
                                 <a href="{{ url('/detail/' . $item->slug) }}" class="text-decoration-none d-block">
                                     <div class="card mb-3 hover-card" style="border: 1px solid #ddd; border-radius: 5px; overflow: hidden; height: 100px; border-bottom: 2px solid red;">
                                         <div class="row no-gutters d-flex" style="height: 100%; flex-wrap: nowrap;">
                                             <div class="col-4" style="overflow: hidden; height: 100%;">
-                                                <img src="{{ asset('storage/' . $item->photo) }}" alt=""
+                                                <img src="{{ asset('uploads/' . $item->photo) }}" alt=""
                                                     class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
                                             </div>
                                             <div class="col-8">
@@ -84,15 +84,11 @@
 
     <!-- Advertisement Banner -->
     <div class="advertisement-banner text-center my-4" style="padding: 0 15px;">
-        @php
-            $adBanner = App\Models\Ads::latest()->first();
-        @endphp
-        @if ($adBanner)
-            <img src="{{ asset('storage/' . $adBanner->photo) }}" alt="{{ $adBanner->title }}"
-                class="img-fluid ad-responsive">
-        @else
-            <p>No advertisement available.</p>
-        @endif
+        <a href="https://api.whatsapp.com/send/?phone=%2B6285183260964&text&type=phone_number&app_absent=0" target="_blank">
+            <img src="{{ asset('assets/img/iklan-sponsor2.jpg') }}"
+                 class="img-fluid ad-responsive"
+                 alt="Iklan Sponsor">
+        </a>
     </div>
 
 
@@ -121,7 +117,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -169,7 +165,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -205,7 +201,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-tittle mb-30 d-flex justify-content-between align-items-center">
-                            <h3>Agama</h3>
+                            <h3>Keagamaan</h3>
                             <a href="{{ url('/blog?category=3') }}" class="more-news-link">More news...</a>
                         </div>
                     </div>
@@ -217,7 +213,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -264,7 +260,7 @@
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
                                         <div class="what-img">
-                                            <img src="{{ asset('storage/' . $newsItem->photo) }}" alt=""
+                                            <img src="{{ asset('uploads/' . $newsItem->photo) }}" alt=""
                                                 class="img-fluid card-img-top"
                                                 style="width: 100%; height: 200px; object-fit: cover;">
                                         </div>
@@ -284,6 +280,24 @@
                             <p class="text-center text-muted">No news available in this category.</p>
                         </div>
                     @endif
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup Modal -->
+    <div class="modal fade" id="popupImageModal" tabindex="-1" role="dialog" aria-labelledby="popupImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content position-relative">
+                <!-- Tombol Close "X" -->
+                <button type="button" class="close position-absolute" style="top: 10px; right: 15px; z-index: 10;" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
+                </button>
+    
+                <div class="modal-body p-0">
+                    <a href="https://galowtunasbangsa.com/Halo!.GALOW.Pengaduan" target="_blank">
+                        <img src="{{ asset('assets/img/logo/modal-pengaduan.jpg') }}" alt="Popup" class="img-fluid w-100">
+                    </a>
+                    <!--<img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" alt="Popup" class="img-fluid w-100">-->
                 </div>
             </div>
         </div>
@@ -393,4 +407,11 @@
             }
         }
     </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tampilkan modal popup setelah halaman selesai dimuat
+        $('#popupImageModal').modal('show');
+    });
+    </script>
+
 @endsection

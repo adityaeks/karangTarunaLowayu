@@ -37,7 +37,9 @@ class OrganisasiResource extends Resource
                 TextInput::make('description')
                     ->required(),
                 FileUpload::make('photo')
-                    ->required(),
+                    ->required()
+                    ->disk('public_uploads') // custom disk ke public/uploads
+                    ->directory('organisasi'),
             ]);
     }
 
@@ -45,7 +47,9 @@ class OrganisasiResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('photo'),
+                ImageColumn::make('photo')
+                    ->disk('public_uploads')
+                    ->getStateUsing(fn ($record) => asset('uploads/' . $record->photo)),
                 TextColumn::make('name'),
                 TextColumn::make('description'),
             ])

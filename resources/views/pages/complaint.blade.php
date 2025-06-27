@@ -43,7 +43,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">
-                <h2 class="contact-title">Pengaduan</h2>
+                <h2 class="contact-title">Halo! GALOW Pengaduan</h2>
             </div>
             <div class="col-lg-8">
                 @if (session('success'))
@@ -102,29 +102,29 @@
                     </div>
                 </form>
             </div>
-            <div class="col-lg-3 offset-lg-1">
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-home"></i></span>
-                    <div class="media-body">
-                        <h3>Desa Lowayu</h3>
-                        <p>------</p>
-                    </div>
-                </div>
-                <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
-                    <div class="media-body">
-                        <h3>+62 856-4608-3862</h3>
-                        <p>-------</p>
-                    </div>
-                </div>
-                {{-- <div class="media contact-info">
-                    <span class="contact-info__icon"><i class="ti-email"></i></span>
-                    <div class="media-body">
-                        <h3>support@colorlib.com</h3>
-                        <p>Send us your query anytime!</p>
-                    </div>
-                </div> --}}
-            </div>
+            <!--<div class="col-lg-3 offset-lg-1">-->
+            <!--    <div class="media contact-info">-->
+            <!--        <span class="contact-info__icon"><i class="ti-home"></i></span>-->
+            <!--        <div class="media-body">-->
+            <!--            <h3>Desa Lowayu</h3>-->
+            <!--            <p>------</p>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--    <div class="media contact-info">-->
+            <!--        <span class="contact-info__icon"><i class="ti-tablet"></i></span>-->
+            <!--        <div class="media-body">-->
+            <!--            <h3>+62 856-4608-3862</h3>-->
+            <!--            <p>-------</p>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--    {{-- <div class="media contact-info">-->
+            <!--        <span class="contact-info__icon"><i class="ti-email"></i></span>-->
+            <!--        <div class="media-body">-->
+            <!--            <h3>support@colorlib.com</h3>-->
+            <!--            <p>Send us your query anytime!</p>-->
+            <!--        </div>-->
+            <!--    </div> --}}-->
+            <!--</div>-->
         </div>
     </div>
 @endsection

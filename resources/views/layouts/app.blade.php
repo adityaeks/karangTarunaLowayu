@@ -2,6 +2,7 @@
 <html class="no-js" lang="zxx">
 
 <head>
+    @yield('meta')
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Karang Taruna Lowayu</title>
@@ -25,7 +26,14 @@
     <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
-    <style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-pQnxd0RLGIYKYj8mLBF5Kb+JNG4E8c0q5OwV0VZqC1fAzbEkg+Tn0/j5L2YBA1zXgZ+/rU9zaaRih5P5r6Hqig=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+        <style>
         .card {
             display: flex;
             flex-direction: column;

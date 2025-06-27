@@ -41,6 +41,7 @@ jobs:
           exclude: |
             **/.git*
             **/node_modules/**
+            **/vendor/**
             **/tests/**
             **/storage/framework/**
             **/storage/logs/**

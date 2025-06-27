@@ -1,0 +1,47 @@
+name: 🚀 Laravel Deploy via FTP to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Laravel FTP Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🔄 Checkout Code
+        uses: actions/checkout@v3
+
+      - name: 🧰 Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          extensions: mbstring, bcmath, pdo, openssl
+          coverage: none
+
+      - name: 📦 Install Dependencies (Composer)
+        run: composer install --no-dev --optimize-autoloader
+
+      - name: ⚙️ Laravel Commands
+        run: |
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+
+      - name: 🚀 Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/
+          local-dir: ./
+          exclude: |
+            **/.git*
+            **/node_modules/**
+            **/tests/**
+            **/storage/framework/**
+            **/storage/logs/**
+            .env

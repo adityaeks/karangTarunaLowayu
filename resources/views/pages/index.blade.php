@@ -5,25 +5,15 @@
         $news = App\Models\Berita::latest()->get();
         $sliderImages = App\Models\Slider::latest()->take(5)->get();
 
-        // Data dummy pertandingan Sepak Bola
-        $sepakBolaMatches = [
-            ['team1' => 'RT 04', 'team2' => 'RT 05', 'score' => '0 - 0', 'date' => '2025-07-14', 'time' => '15:25'],
-            ['team1' => 'RT 16', 'team2' => 'RT 08', 'score' => '0 - 0', 'date' => '2025-07-14', 'time' => '16:15'],
-            ['team1' => 'RT 16', 'team2' => 'RT 06', 'score' => '2 - 2', 'date' => '2025-07-15', 'time' => '15:25'],
-            ['team1' => 'RT 05', 'team2' => 'RT 06', 'score' => '2 - 2', 'date' => '2025-07-15', 'time' => '16:15'],
-        ];
-        $sepakBolaGrouped = collect($sepakBolaMatches)->groupBy('date');
-
-        // Data dummy pertandingan Bola Voli
-        $voliMatches = [
-            ['team1' => 'RT 07', 'team2' => 'RT 04', 'score' => '0 - 0', 'date' => '2025-08-06', 'time' => '15:25'],
-            ['team1' => 'RT 09', 'team2' => 'RT 29', 'score' => '0 - 0', 'date' => '2025-08-06', 'time' => '16:15'],
-            // ['team1' => 'RT 03', 'team2' => 'RT 04', 'score' => '0 - 0', 'date' => '2025-07-18', 'time' => '16:30'],
-            // ['team1' => 'RT 03', 'team2' => 'RT 04', 'score' => '0 - 0', 'date' => '2025-07-18', 'time' => '16:30'],
-        ];
-        $voliGrouped = collect($voliMatches)->groupBy('date');
-
+        use App\Models\Match17;
         use Carbon\Carbon;
+
+        $sepakBolaMatches = Match17::where('type', 'sepakbola')->orderBy('date')->orderBy('time')->get();
+        $sepakBolaGrouped = $sepakBolaMatches->groupBy('date');
+
+        $voliMatches = Match17::where('type', 'voli')->orderBy('date')->orderBy('time')->get();
+        $voliGrouped = $voliMatches->groupBy('date');
+
         $today = Carbon::today()->toDateString();
         function getActiveDate($grouped, $today)
         {
@@ -121,7 +111,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="sepakBolaCarousel" class="carousel slide" data-bs-interval="false">
+                            <div id="sepakBolaCarousel" class="carousel slide">
                                 <div class="carousel-inner">
                                     @foreach ($sepakBolaGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $sepakBolaActiveDate ? 'active' : '' }}">
@@ -148,7 +138,7 @@
                                                             style="font-size:10px; color:#555; background: #fff3e0; padding: 1px 8px 1px 6px; border-radius: 8px; font-weight: bold;">
                                                             <i class="fa fa-clock-o" style="margin-right:3px;"></i>
                                                             {{ \Carbon\Carbon::parse($match['date'])->format('d M Y') }} •
-                                                            {{ $match['time'] }}
+                                                            {{ substr($match['time'], 0, 5) }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,7 +175,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="voliCarousel" class="carousel slide" data-bs-interval="false">
+                            <div id="voliCarousel" class="carousel slide">
                                 <div class="carousel-inner">
                                     @foreach ($voliGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $voliActiveDate ? 'active' : '' }}">
@@ -212,7 +202,7 @@
                                                             style="font-size:10px; color:#555; background: #fff3e0; padding: 1px 8px 1px 6px; border-radius: 8px; font-weight: bold;">
                                                             <i class="fa fa-clock-o" style="margin-right:3px;"></i>
                                                             {{ \Carbon\Carbon::parse($match['date'])->format('d M Y') }} •
-                                                            {{ $match['time'] }}
+                                                            {{ substr($match['time'], 0, 5) }}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -635,10 +625,23 @@
         }
     </style>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Tampilkan modal popup setelah halaman selesai dimuat
-            $('#popupImageModal').modal('show');
+        // Bootstrap 4 (jQuery)
+        $(function() {
+            $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({interval: false, pause: true, wrap: true});
         });
+        // Bootstrap 5 (vanilla JS)
+        if (typeof bootstrap !== 'undefined') {
+            var sepakBolaCarousel = document.getElementById('sepakBolaCarousel');
+            var voliCarousel = document.getElementById('voliCarousel');
+            if (sepakBolaCarousel) {
+                var sbc = bootstrap.Carousel.getOrCreateInstance(sepakBolaCarousel, {interval: false, pause: true, wrap: true});
+                sbc.pause();
+            }
+            if (voliCarousel) {
+                var vc = bootstrap.Carousel.getOrCreateInstance(voliCarousel, {interval: false, pause: true, wrap: true});
+                vc.pause();
+            }
+        }
     </script>
 
 @endsection

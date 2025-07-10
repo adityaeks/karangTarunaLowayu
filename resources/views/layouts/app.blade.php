@@ -29,7 +29,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-pQnxd0RLGIYKYj8mLBF5Kb+JNG4E8c0q5OwV0VZqC1fAzbEkg+Tn0/j5L2YBA1zXgZ+/rU9zaaRih5P5r6Hqig=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -106,6 +105,13 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.jQuery) {
+                $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({interval: false, pause: true, wrap: true});
+            }
+        });
+    </script>
 </body>
 
 </html>

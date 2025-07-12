@@ -77,14 +77,14 @@ Route::get('/organisasi', function () {
     $organisasis = Organisasi::all();
     return view('pages.organitation', compact('organisasis'));
 });
-Route::get('/halo.galow.Pengaduan', function () {
+Route::get('/halo.galow.pengaduan', function () {
     return view('pages.complaint');
 })->name('pengaduan.form');
 
 // Route::post('/pengaduan/store', [PengaduanController::class, 'store'])
 //     ->name('pengaduan.store');
 
-Route::post('/halo.galow.Pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+Route::post('/halo.galow.pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
 
 
 Route::get('/test-mail', function () {

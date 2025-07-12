@@ -1,5 +1,14 @@
 @extends('layouts.app')
 
+@section('meta')
+    <title>Tentang Kami | Galow Tunas Bangsa</title>
+    <meta name="description" content="Profil, visi, dan misi Galow Tunas Bangsa, organisasi kepemudaan Desa Lowayu.">
+    <meta property="og:title" content="Tentang Kami | Galow Tunas Bangsa" />
+    <meta property="og:description" content="Profil, visi, dan misi Galow Tunas Bangsa, organisasi kepemudaan Desa Lowayu." />
+    <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+@endsection
+
 @section('content')
 <div class="container">
     <div class="text-center my-4">

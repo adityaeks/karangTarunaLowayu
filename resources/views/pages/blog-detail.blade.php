@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('meta')
+    <title>{{ $news->name }} | Galow Tunas Bangsa</title>
+    <meta name="description" content="{{ Str::limit(strip_tags($news->content), 150) }}">
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{{ $news->name }}" />
     <meta property="og:description" content="{{ Str::limit(strip_tags($news->content), 150) }}" />

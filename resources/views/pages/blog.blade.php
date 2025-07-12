@@ -7,6 +7,14 @@
             'allow_unsafe_links' => false,
         ]);
     @endphp
+    @section('meta')
+        <title>Berita & Artikel | Galow Tunas Bangsa</title>
+        <meta name="description" content="Kumpulan berita, artikel, dan informasi terbaru dari Galow Tunas Bangsa.">
+        <meta property="og:title" content="Berita & Artikel | Galow Tunas Bangsa" />
+        <meta property="og:description" content="Kumpulan berita, artikel, dan informasi terbaru dari Galow Tunas Bangsa." />
+        <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
+        <meta property="og:url" content="{{ url()->current() }}" />
+    @endsection
     <style>
         .blog_item {
             height: 90%;

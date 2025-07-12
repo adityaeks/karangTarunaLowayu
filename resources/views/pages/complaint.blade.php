@@ -1,45 +1,15 @@
 @extends('layouts.app')
 
+@section('meta')
+    <title>Pengaduan | Galow Tunas Bangsa</title>
+    <meta name="description" content="Form pengaduan online Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu. Sampaikan keluhan, saran, atau laporan Anda di sini.">
+    <meta property="og:title" content="Pengaduan | Galow Tunas Bangsa" />
+    <meta property="og:description" content="Form pengaduan online Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu. Sampaikan keluhan, saran, atau laporan Anda di sini." />
+    <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+@endsection
+
 @section('content')
-    {{-- <div class="container mt-5">
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h3 class="mb-0">Form Pengaduan</h3>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data">
-                    @csrf
-                    <!-- Nama -->
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-
-                    <!-- Nomor -->
-                    <div class="mb-3">
-                        <label for="number" class="form-label">Nomor Telepon/HP</label>
-                        <input type="number" class="form-control" id="number" name="number" required>
-                    </div>
-
-                    <!-- Konten Pengaduan -->
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Isi Pengaduan</label>
-                        <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
-                    </div>
-
-                    <!-- Upload Bukti -->
-                    <div class="mb-3">
-                        <label for="bukti_pengaduan" class="form-label">Upload Bukti Pengaduan</label>
-                        <input type="file" class="form-control" id="bukti_pengaduan" name="bukti_pengaduan"
-                            accept="image/*,.pdf,.doc,.docx">
-                        <div class="form-text">Format file: gambar, PDF, atau DOC (maks. 5MB)</div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Kirim Pengaduan</button>
-                </form>
-            </div>
-        </div>
-    </div> --}}
     <div class="container mt-4">
         <div class="row">
             <div class="col-12">

@@ -1,4 +1,4 @@
-name: 🚀 Laravel Deploy via FTP to Hostinger
+name: �� Laravel Deploy via SSH to Hostinger
 
 on:
   push:
@@ -7,75 +7,34 @@ on:
 
 jobs:
   deploy:
-    name: Laravel FTP Deploy
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔄 Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 🧰 Setup PHP
-        uses: shivammathur/setup-php@v2
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
         with:
-          php-version: '8.3'
-          extensions: mbstring, bcmath, pdo, openssl
-          coverage: none
+          ssh-private-key: ${{ secrets.HOSTINGER_SSH_KEY }}
 
-      - name: 📦 Install Dependencies (Composer)
-        run: composer install --no-dev --optimize-autoloader
-
-      - name: 🔧 Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: 📦 Install Node Dependencies
-        run: npm ci
-
-      - name: 🏗️ Build Assets
-        run: npm run build
-
-      - name: ⚙️ Laravel Commands
+      - name: Copy files via rsync
         run: |
-          cp .env.example .env
-          php artisan key:generate
-          php artisan config:clear
-          php artisan view:clear
-          php artisan route:clear
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
+          rsync -avz --delete --exclude=".git*" --exclude="node_modules" --exclude="tests" ./ ${{ secrets.HOSTINGER_USER }}@${{ secrets.HOSTINGER_HOST }}:/home/${{ secrets.HOSTINGER_USER }}/public_html/
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
-      - name: 🚀 Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Run Laravel commands on server
+        uses: appleboy/ssh-action@v1.0.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
-          local-dir: ./
-          dry-run: false
-          dangerous-clean-slate: false
-          exclude: |
-            **/.git*
-            **/.github/**
-            **/node_modules/**
-            **/vendor/**
-            **/tests/**
-            **/storage/framework/cache/**
-            **/storage/framework/sessions/**
-            **/storage/framework/views/**
-            **/storage/logs/**
-            .env
-            .env.example
-            .env.local
-            .env.testing
-            .gitignore
-            README.md
-            package.json
-            package-lock.json
-            vite.config.js
-            tailwind.config.js
-            postcss.config.js
-            phpunit.xml
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USER }}
+          key: ${{ secrets.HOSTINGER_SSH_KEY }}
+          port: ${{ secrets.HOSTINGER_PORT }}
+          script: |
+            cd /home/${{ secrets.HOSTINGER_USER }}/public_html
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache

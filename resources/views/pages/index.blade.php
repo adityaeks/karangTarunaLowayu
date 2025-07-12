@@ -17,6 +17,14 @@
         });
     </script>
 @endsection
+@section('meta')
+    <title>Galow Tunas Bangsa - Portal Informasi & Berita Desa Lowayu</title>
+    <meta name="description" content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu.">
+    <meta property="og:title" content="Galow Tunas Bangsa - Portal Informasi & Berita Desa Lowayu" />
+    <meta property="og:description" content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu." />
+    <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+@endsection
 @section('content')
     @php
         $slider = App\Models\Slider::latest()->first();

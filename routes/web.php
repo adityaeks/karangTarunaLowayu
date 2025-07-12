@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Berita;
 use App\Models\Organisasi;
 use App\Http\Controllers\PengaduanController;
+use App\Http\Controllers\VisitorController;
 use App\Models\Category;
 use Filament\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Mail;
@@ -114,3 +115,6 @@ Route::get('/news-sitemap.xml', function () {
         'beritas' => $beritaTerbaru,
     ])->header('Content-Type', 'application/xml');
 });
+
+// API endpoint untuk statistik pengunjung
+Route::get('/api/visitor-stats', [VisitorController::class, 'getStatistics']);

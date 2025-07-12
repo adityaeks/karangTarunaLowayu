@@ -1,4 +1,22 @@
 @extends('layouts.app')
+@section('head')
+    <meta name="turbolinks-cache-control" content="no-cache">
+    <!-- Force-load modal on page load -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                try {
+                    if (jQuery && jQuery('#popupImageModal').length) {
+                        jQuery('#popupImageModal').modal('show');
+                        console.log('Modal forced to show from head section');
+                    }
+                } catch (e) {
+                    console.error('Error showing modal from head:', e);
+                }
+            }, 1000);
+        });
+    </script>
+@endsection
 @section('content')
     @php
         $slider = App\Models\Slider::latest()->first();
@@ -111,7 +129,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="sepakBolaCarousel" class="carousel slide">
+                            <div id="sepakBolaCarousel" class="carousel slide" data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($sepakBolaGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $sepakBolaActiveDate ? 'active' : '' }}">
@@ -122,7 +140,7 @@
                                                         style="gap: 8px;">
                                                         <span class="team-name"
                                                             style="min-width: 110px; text-align: right; font-weight:700; color:#222; font-size:15px;">
-                                                            {{ $match['team1'] }}
+                                                            RT {{ $match['team1'] }}
                                                         </span>
                                                         <span class="score-box"
                                                             style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-weight: bold; padding: 2px 12px; border-radius: 6px; font-size: 15px; box-shadow: 0 2px 8px rgba(186,45,17,0.08); letter-spacing: 2px;">
@@ -130,7 +148,7 @@
                                                         </span>
                                                         <span class="team-name"
                                                             style="min-width: 110px; text-align: left; font-weight:700; color:#222; font-size:15px;">
-                                                            {{ $match['team2'] }}
+                                                            RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
                                                     <div class="text-center">
@@ -148,11 +166,11 @@
                                 </div>
                                 <a class="carousel-control-prev" href="#sepakBolaCarousel" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Sebelumnya</span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
                                 <a class="carousel-control-next" href="#sepakBolaCarousel" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Selanjutnya</span>
+                                    <span class="sr-only">Next</span>
                                 </a>
                             </div>
                         </div>
@@ -175,7 +193,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="voliCarousel" class="carousel slide">
+                            <div id="voliCarousel" class="carousel slide" data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($voliGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $voliActiveDate ? 'active' : '' }}">
@@ -186,7 +204,7 @@
                                                         style="gap: 8px;">
                                                         <span class="team-name"
                                                             style="min-width: 110px; text-align: right; font-weight:700; color:#222; font-size:15px;">
-                                                            {{ $match['team1'] }}
+                                                            RT {{ $match['team1'] }}
                                                         </span>
                                                         <span class="score-box"
                                                             style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-weight: bold; padding: 2px 12px; border-radius: 6px; font-size: 15px; box-shadow: 0 2px 8px rgba(186,45,17,0.08); letter-spacing: 2px;">
@@ -194,7 +212,7 @@
                                                         </span>
                                                         <span class="team-name"
                                                             style="min-width: 110px; text-align: left; font-weight:700; color:#222; font-size:15px;">
-                                                            {{ $match['team2'] }}
+                                                            RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
                                                     <div class="text-center">
@@ -212,14 +230,13 @@
                                 </div>
                                 <a class="carousel-control-prev" href="#voliCarousel" role="button" data-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Sebelumnya</span>
+                                    <span class="sr-only">Previous</span>
                                 </a>
                                 <a class="carousel-control-next" href="#voliCarousel" role="button" data-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Selanjutnya</span>
+                                    <span class="sr-only">Next</span>
                                 </a>
-                            </div>
-                        </div>
+                            </div>                        </div>
                     </div>
                 </div>
             </div>
@@ -428,27 +445,85 @@
             </div>
         </div>
     </div>
+
+    <!-- Visitor Counter Widget Section -->
+    {{-- <div class="weekly2-news-area weekly2-pading">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card shadow-sm" style="border-radius: 8px; border: 1.5px solid #eee;">
+                        <div class="p-3" style="background: #fff; border-bottom: 1.5px solid #eee;">
+                            <div class="text-center">
+                                <span style="font-weight: 900; font-size: 22px; letter-spacing: 2px; color: #ba2d11; text-transform: uppercase; text-shadow: 1px 1px 2px #eee; padding-bottom: 3px; display: inline-block;">
+                                    <i class="fas fa-chart-line mr-2"></i> STATISTIK PENGUNJUNG
+                                </span>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center py-4" style="padding: 12px 20px;">
+                                    <span class="h5 mb-0"><i class="fas fa-users mr-3" style="color: #ba2d11;"></i> Total Pengunjung</span>
+                                    <span id="total-visitors" data-value="0" class="badge badge-pill h5 mb-0" style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-size: 18px; padding: 8px 20px; min-width: 100px;">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center py-4" style="padding: 12px 20px;">
+                                    <span class="h5 mb-0"><i class="fas fa-calendar-day mr-3" style="color: #ba2d11;"></i> Hari Ini</span>
+                                    <span id="today-visitors" data-value="0" class="badge badge-pill h5 mb-0" style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-size: 18px; padding: 8px 20px; min-width: 100px;">0</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center py-4" style="padding: 12px 20px;">
+                                    <span class="h5 mb-0"><i class="fas fa-signal mr-3" style="color: #ba2d11;"></i> Online</span>
+                                    <span id="online-visitors" data-value="0" class="badge badge-pill h5 mb-0" style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-size: 18px; padding: 8px 20px; min-width: 100px;">0</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
     <!-- Popup Modal -->
-    {{-- <div class="modal fade" id="popupImageModal" tabindex="-1" role="dialog" aria-labelledby="popupImageModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="popupImageModal" tabindex="-1" role="dialog" aria-labelledby="popupImageModalLabel" aria-hidden="true" style="z-index: 9999;">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content position-relative">
                 <!-- Tombol Close "X" -->
-                <button type="button" class="close position-absolute" style="top: 10px; right: 15px; z-index: 10;"
-                    data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close position-absolute" style="top: 10px; right: 15px; z-index: 10;" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
                 </button>
 
                 <div class="modal-body p-0">
                     <a href="https://galowtunasbangsa.com/Halo!.GALOW.Pengaduan" target="_blank">
-                        <img src="{{ asset('assets/img/logo/modal-pengaduan.jpg') }}" alt="Popup"
-                            class="img-fluid w-100">
+                        <img src="{{ asset('assets/img/logo/modal-pengaduan.jpg') }}" alt="Popup" class="img-fluid w-100">
                     </a>
                     <!--<img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" alt="Popup" class="img-fluid w-100">-->
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
+
+    <!-- Dedicated modal script -->
+    <script>
+        // Immediate self-executing function to show the modal
+        (function() {
+            // Try to show immediately
+            if (typeof jQuery !== 'undefined') {
+                jQuery('#popupImageModal').modal('show');
+                console.log('Modal show attempt from inline script');
+            }
+
+            // Also try with a small delay
+            setTimeout(function() {
+                if (typeof jQuery !== 'undefined') {
+                    // Remove any existing backdrops first
+                    jQuery('.modal-backdrop').remove();
+                    jQuery('body').removeClass('modal-open');
+
+                    // Then show the modal
+                    jQuery('#popupImageModal').modal('show');
+                    console.log('Modal show attempt from inline script with delay');
+                }
+            }, 800);
+        })();
+    </script>
 
     <style>
         .hover-text {
@@ -623,25 +698,151 @@
             border: 2px solid #2196f3 !important;
             margin-bottom: 20px !important;
         }
+
+        /* Carousel controls menggunakan styling default Bootstrap */
     </style>
     <script>
         // Bootstrap 4 (jQuery)
         $(function() {
+            // Inisialisasi carousels
             $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({interval: false, pause: true, wrap: true});
         });
-        // Bootstrap 5 (vanilla JS)
-        if (typeof bootstrap !== 'undefined') {
-            var sepakBolaCarousel = document.getElementById('sepakBolaCarousel');
-            var voliCarousel = document.getElementById('voliCarousel');
-            if (sepakBolaCarousel) {
-                var sbc = bootstrap.Carousel.getOrCreateInstance(sepakBolaCarousel, {interval: false, pause: true, wrap: true});
-                sbc.pause();
-            }
-            if (voliCarousel) {
-                var vc = bootstrap.Carousel.getOrCreateInstance(voliCarousel, {interval: false, pause: true, wrap: true});
-                vc.pause();
-            }
-        }
-    </script>
 
+        // Visitor Counter Functions
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(1) + 'M';
+            }
+            if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num;
+        }
+
+        function updateVisitorStats() {
+            fetch('/api/visitor-stats')
+                .then(response => response.json())
+                .then(data => {
+                    // Update counters with animation
+                    animateCounter('total-visitors', data.total);
+                    animateCounter('today-visitors', data.today);
+                    animateCounter('online-visitors', data.online);
+                })
+                .catch(error => console.error('Error fetching visitor stats:', error));
+        }
+
+        function animateCounter(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+
+            const currentValue = parseInt(element.getAttribute('data-value') || '0');
+            element.setAttribute('data-value', targetValue);
+
+            // If the difference is small, just update without animation
+            if (Math.abs(targetValue - currentValue) < 5) {
+                element.textContent = formatNumber(targetValue);
+                return;
+            }
+
+            let startValue = currentValue;
+            const duration = 1000;
+            const startTime = performance.now();
+
+            function updateCounter(timestamp) {
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                const currentCount = Math.floor(startValue + (targetValue - startValue) * progress);
+                element.textContent = formatNumber(currentCount);
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = formatNumber(targetValue);
+                }
+            }
+
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Update visitor stats on page load and every 30 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            updateVisitorStats();
+            setInterval(updateVisitorStats, 30000);
+
+            // Force modal to appear with various methods and debugging
+            console.log("DOM Content Loaded - attempting to show modal");
+
+            // Method 1: Standard Bootstrap modal show
+            setTimeout(function() {
+                try {
+                    console.log("Modal element exists:", $('#popupImageModal').length > 0);
+                    $('#popupImageModal').modal('show');
+                    console.log("Modal show method 1 called");
+                } catch (e) {
+                    console.error("Error in method 1:", e);
+                }
+            }, 500);
+
+            // Method 2: Direct jQuery method
+            setTimeout(function() {
+                try {
+                    $('#popupImageModal').modal({
+                        show: true,
+                        backdrop: 'static'
+                    });
+                    console.log("Modal show method 2 called");
+                } catch (e) {
+                    console.error("Error in method 2:", e);
+                }
+            }, 1000);
+
+            // Method 3: Direct DOM manipulation (last resort)
+            setTimeout(function() {
+                try {
+                    var modal = document.getElementById('popupImageModal');
+                    if (modal) {
+                        modal.classList.add('show');
+                        modal.style.display = 'block';
+                        document.body.classList.add('modal-open');
+
+                        // Create backdrop if needed
+                        if (!document.querySelector('.modal-backdrop')) {
+                            var backdrop = document.createElement('div');
+                            backdrop.className = 'modal-backdrop fade show';
+                            document.body.appendChild(backdrop);
+                        }
+                        console.log("Modal show method 3 (direct DOM) called");
+                    } else {
+                        console.error("Modal element not found");
+                    }
+                } catch (e) {
+                    console.error("Error in method 3:", e);
+                }
+            }, 1500);
+        });
+
+        // Additional fallback using window.onload
+        window.onload = function() {
+            console.log("Window loaded - attempting modal show");
+            setTimeout(function() {
+                try {
+                    $('#popupImageModal').modal('show');
+                    console.log("Modal show from window.onload called");
+                } catch (e) {
+                    console.error("Error in window.onload modal show:", e);
+                }
+            }, 1000);
+        };
+
+        // One more attempt using a simple timeout
+        setTimeout(function() {
+            console.log("Final timeout attempt - showing modal");
+            try {
+                $('#popupImageModal').modal('show');
+            } catch (e) {
+                console.error("Error in final timeout attempt:", e);
+            }
+        }, 2000);
+    </script>
 @endsection

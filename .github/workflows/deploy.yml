@@ -37,7 +37,7 @@ jobs:
           port: ${{ secrets.HOSTINGER_PORT }}
           script: |
             cd /home/${{ secrets.HOSTINGER_USER }}/public_html
-            composer install --no-dev --optimize-autoloader
+            php ~/composer2.phar install --no-dev --optimize-autoloader
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache

@@ -86,7 +86,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="{{ url('/organisasi') }}">Organisasi Kepemudaan</a></li>
-                                    <li><a href="{{ url('/Halo!.GALOW.Pengaduan') }}">Halo! GALOW Pengaduan</a></li>
+                                    <li><a href="{{ url('/halo.galow.pengaduan') }}">Halo! GALOW Pengaduan</a></li>
                                 </ul>
                             </nav>
                         </div>

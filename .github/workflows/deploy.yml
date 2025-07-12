@@ -24,8 +24,22 @@ jobs:
       - name: 📦 Install Dependencies (Composer)
         run: composer install --no-dev --optimize-autoloader
 
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: 📦 Install Node Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Assets
+        run: npm run build
+
       - name: ⚙️ Laravel Commands
         run: |
+          cp .env.example .env
+          php artisan key:generate
           php artisan config:clear
           php artisan view:clear
           php artisan route:clear
@@ -41,11 +55,27 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /public_html/
           local-dir: ./
+          dry-run: false
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
+            **/.github/**
             **/node_modules/**
             **/vendor/**
             **/tests/**
-            **/storage/framework/**
+            **/storage/framework/cache/**
+            **/storage/framework/sessions/**
+            **/storage/framework/views/**
             **/storage/logs/**
             .env
+            .env.example
+            .env.local
+            .env.testing
+            .gitignore
+            README.md
+            package.json
+            package-lock.json
+            vite.config.js
+            tailwind.config.js
+            postcss.config.js
+            phpunit.xml

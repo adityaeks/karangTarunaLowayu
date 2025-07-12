@@ -9,6 +9,8 @@
     <meta property="og:url" content="{{ url()->current() }}" />
 @endsection
 
+{{-- tes --}}
+
 @section('content')
     <div class="container mt-4">
         <div class="row">

@@ -51,9 +51,9 @@ class PengaduanController extends Controller
                 'content' => $validated['content'],
                 'bukti_pengaduan' => $filePath,
             ]);
-            
-            $toEmail = 'galowtunasbangsa@gmail.com';
-            Mail::to($toEmail)->send(new PengaduanMail($pengaduan));
+
+            // $toEmail = 'galowtunasbangsa@gmail.com';
+            // Mail::to($toEmail)->send(new PengaduanMail($pengaduan));
 
             \Log::info('Pengaduan saved successfully:', ['id' => $pengaduan->id]);
 

@@ -63,6 +63,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'pengaduan_uploads' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/pengaduan_files'),
+            'url' => env('APP_URL') . '/uploads/pengaduan_files',
+            'visibility' => 'public',
+        ],
+
 
     ],
 

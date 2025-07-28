@@ -1,12 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @php
-        use League\CommonMark\CommonMarkConverter;
-        $converter = new CommonMarkConverter([
-            'html_input' => 'strip',
-            'allow_unsafe_links' => false,
-        ]);
-    @endphp
     @section('meta')
         <title>Berita & Artikel | Galow Tunas Bangsa</title>
         <meta name="description" content="Kumpulan berita, artikel, dan informasi terbaru dari Galow Tunas Bangsa.">
@@ -52,7 +45,7 @@
             display: flex;
             flex-direction: column;
             padding: 15px;
-            min-height: 200px;
+            min-height: 180px;
         }
 
         /* Tetapkan warna default untuk judul */
@@ -61,7 +54,7 @@
             font-size: 1.1rem;
             margin-bottom: 8px;
             line-height: 1.4;
-            height: 2.4em;
+            min-height: 2.4em;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -73,6 +66,9 @@
         /* Warna default untuk paragraf */
         .blog_details p {
             color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            flex: 1;
         }
 
         /* Aturan untuk link di dalam blog item */
@@ -86,6 +82,21 @@
         .blog-link:hover {
             text-decoration: none;
             color: inherit;
+        }
+
+        /* Hanya mengubah warna judul (h2) saat hover pada blog_item */
+        .blog_item:hover h2 {
+            color: #e74c3c !important;
+        }
+
+        /* Pastikan paragraf tetap warna aslinya saat hover */
+        .blog_item:hover p {
+            color: #555 !important;
+        }
+
+        /* Pastikan info link tetap warna aslinya saat hover */
+        .blog_item:hover .blog-info-link li {
+            color: #666 !important;
         }
 
         /* Aturan untuk info link di bagian bawah blog item */
@@ -144,6 +155,16 @@
         /* Hanya mengubah warna judul (h2) saat hover pada blog_item */
         .blog_item:hover h2 {
             color: #e74c3c !important;
+        }
+
+        /* Pastikan paragraf tetap warna aslinya saat hover */
+        .blog_item:hover p {
+            color: #555 !important;
+        }
+
+        /* Pastikan info link tetap warna aslinya saat hover */
+        .blog_item:hover .blog-info-link li {
+            color: #666 !important;
         }
     </style>
     <section class="blog_area mt-4">
@@ -206,10 +227,7 @@
 
                                             <div class="blog_details">
                                                 <h2>{{ Str::limit($item->name, 50) }}</h2>
-                                                <p>{{ Str::limit($item->content, 120) }}</p>
-                                                {{-- <div class="markdown-content">
-                                                    {!! Str::limit($converter->convert($item->content)->getContent(), 150) !!}
-                                                </div> --}}
+                                                <p>{{ Str::limit(html_entity_decode(strip_tags($item->content)), 120) }}</p>
                                                 <ul class="blog-info-link">
                                                     <li><i class="fa fa-folder"></i> {{ $item->category->name }}</li>
                                                     <li><i

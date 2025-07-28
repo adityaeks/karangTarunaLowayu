@@ -137,25 +137,21 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="sepakBolaCarousel" class="carousel slide" data-touch="true">
+                            <div id="sepakBolaCarousel" class="carousel slide" data-ride="false" data-interval="false" data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($sepakBolaGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $sepakBolaActiveDate ? 'active' : '' }}">
                                             @foreach ($matches as $i => $match)
                                                 <div
                                                     style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 6px 16px;">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2"
-                                                        style="gap: 8px;">
-                                                        <span class="team-name"
-                                                            style="min-width: 110px; text-align: right; font-weight:700; color:#222; font-size:15px;">
+                                                    <div class="score-display-container mb-2">
+                                                        <span class="team-name-display" style="text-align: right;">
                                                             RT {{ $match['team1'] }}
                                                         </span>
-                                                        <span class="score-box"
-                                                            style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-weight: bold; padding: 2px 12px; border-radius: 6px; font-size: 15px; box-shadow: 0 2px 8px rgba(186,45,17,0.08); letter-spacing: 2px;">
-                                                            {{ $match['score'] }}
+                                                        <span class="score-box-display">
+                                                            {{ $match['score_team1'] ?? 0 }} | {{ $match['score_team2'] ?? 0 }}
                                                         </span>
-                                                        <span class="team-name"
-                                                            style="min-width: 110px; text-align: left; font-weight:700; color:#222; font-size:15px;">
+                                                        <span class="team-name-display" style="text-align: left;">
                                                             RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
@@ -201,25 +197,21 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="voliCarousel" class="carousel slide" data-touch="true">
+                            <div id="voliCarousel" class="carousel slide" data-ride="false" data-interval="false" data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($voliGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $voliActiveDate ? 'active' : '' }}">
                                             @foreach ($matches as $i => $match)
                                                 <div
                                                     style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 6px 16px;">
-                                                    <div class="d-flex justify-content-between align-items-center mb-2"
-                                                        style="gap: 8px;">
-                                                        <span class="team-name"
-                                                            style="min-width: 110px; text-align: right; font-weight:700; color:#222; font-size:15px;">
+                                                    <div class="score-display-container mb-2">
+                                                        <span class="team-name-display" style="text-align: right;">
                                                             RT {{ $match['team1'] }}
                                                         </span>
-                                                        <span class="score-box"
-                                                            style="background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%); color: #fff; font-weight: bold; padding: 2px 12px; border-radius: 6px; font-size: 15px; box-shadow: 0 2px 8px rgba(186,45,17,0.08); letter-spacing: 2px;">
-                                                            {{ $match['score'] }}
+                                                        <span class="score-box-display">
+                                                            {{ $match['score_team1'] ?? 0 }} | {{ $match['score_team2'] ?? 0 }}
                                                         </span>
-                                                        <span class="team-name"
-                                                            style="min-width: 110px; text-align: left; font-weight:700; color:#222; font-size:15px;">
+                                                        <span class="team-name-display" style="text-align: left;">
                                                             RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
@@ -269,7 +261,7 @@
             <div class="weekly2-wrapper">
                 <!-- Section Title -->
                 @php
-                    $weeklyNews = App\Models\Berita::where('category_id', 2)->get();
+                    $weeklyNews = App\Models\Berita::where('category_id', 2)->latest()->take(4)->get();
                 @endphp
                 <div class="row">
                     <div class="col-lg-12">
@@ -281,7 +273,7 @@
                 </div>
                 <div class="row">
                     @if ($weeklyNews->count() > 0)
-                        @foreach ($weeklyNews->take(4) as $newsItem)
+                        @foreach ($weeklyNews as $newsItem)
                             <div class="col-lg-3 col-md-6">
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
@@ -317,7 +309,7 @@
             <div class="weekly2-wrapper">
                 <!-- Section Title -->
                 @php
-                    $weeklyNews = App\Models\Berita::where('category_id', 4)->get();
+                    $weeklyNews = App\Models\Berita::where('category_id', 4)->latest()->take(4)->get();
                 @endphp
                 <div class="row">
                     <div class="col-lg-12">
@@ -329,7 +321,7 @@
                 </div>
                 <div class="row">
                     @if ($weeklyNews->count() > 0)
-                        @foreach ($weeklyNews->take(4) as $newsItem)
+                        @foreach ($weeklyNews as $newsItem)
                             <div class="col-lg-3 col-md-6">
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
@@ -365,7 +357,7 @@
             <div class="weekly2-wrapper">
                 <!-- Section Title -->
                 @php
-                    $weeklyNews = App\Models\Berita::where('category_id', 3)->get();
+                    $weeklyNews = App\Models\Berita::where('category_id', 3)->latest()->take(4)->get();
                 @endphp
                 <div class="row">
                     <div class="col-lg-12">
@@ -377,7 +369,7 @@
                 </div>
                 <div class="row">
                     @if ($weeklyNews->count() > 0)
-                        @foreach ($weeklyNews->take(4) as $newsItem)
+                        @foreach ($weeklyNews as $newsItem)
                             <div class="col-lg-3 col-md-6">
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
@@ -412,7 +404,7 @@
             <div class="weekly2-wrapper">
                 <!-- Section Title -->
                 @php
-                    $weeklyNews = App\Models\Berita::where('category_id', 1)->get();
+                    $weeklyNews = App\Models\Berita::where('category_id', 1)->latest()->take(4)->get();
                 @endphp
                 <div class="row">
                     <div class="col-lg-12">
@@ -424,7 +416,7 @@
                 </div>
                 <div class="row">
                     @if ($weeklyNews->count() > 0)
-                        @foreach ($weeklyNews->take(4) as $newsItem)
+                        @foreach ($weeklyNews as $newsItem)
                             <div class="col-lg-3 col-md-6">
                                 <a href="{{ url('/detail/' . $newsItem->slug) }}" class="text-decoration-none d-block">
                                     <div class="single-recent mb-30">
@@ -708,12 +700,79 @@
         }
 
         /* Carousel controls menggunakan styling default Bootstrap */
+
+        /* Custom CSS untuk Score Box agar tetap dalam 1 baris */
+        .score-display-container {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+            gap: 8px !important;
+            flex-wrap: nowrap !important;
+            overflow: hidden !important;
+        }
+
+        .team-name-display {
+            min-width: 110px !important;
+            font-weight: 700 !important;
+            color: #222 !important;
+            font-size: 17px !important;
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+        }
+
+        .score-box-display {
+            background: linear-gradient(135deg, #ba2d11 60%, #e57373 100%) !important;
+            color: #fff !important;
+            font-weight: bold !important;
+            padding: 4px 12px !important;
+            border-radius: 6px !important;
+            font-size: 15px !important;
+            box-shadow: 0 2px 8px rgba(186,45,17,0.08) !important;
+            letter-spacing: 2px !important;
+            white-space: nowrap !important;
+            min-width: 60px !important;
+            text-align: center !important;
+            display: inline-block !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Media queries untuk responsive */
+        @media (max-width: 576px) {
+            .team-name-display {
+                min-width: 80px !important;
+                font-size: 15px !important;
+            }
+            .score-box-display {
+                font-size: 13px !important;
+                padding: 3px 8px !important;
+                min-width: 50px !important;
+            }
+        }
     </style>
     <script>
         // Bootstrap 4 (jQuery)
         $(function() {
-            // Inisialisasi carousels
-            $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({interval: false, pause: true, wrap: true});
+            // Inisialisasi carousels - Autoplay dinonaktifkan
+            $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({
+                interval: false,  // Nonaktifkan autoplay
+                pause: true,      // Pause saat hover
+                wrap: true,       // Allow looping
+                ride: false       // Jangan mulai otomatis
+            });
+
+            // Pastikan autoplay benar-benar dinonaktifkan
+            $('#sepakBolaCarousel, #voliCarousel').off('slide.bs.carousel slid.bs.carousel');
+
+            // Force stop any existing intervals
+            $('#sepakBolaCarousel, #voliCarousel').each(function() {
+                var carouselData = $(this).data('bs.carousel');
+                if (carouselData && carouselData.interval) {
+                    clearInterval(carouselData.interval);
+                    carouselData.interval = null;
+                }
+            });
         });
 
         // Visitor Counter Functions

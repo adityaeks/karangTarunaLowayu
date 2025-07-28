@@ -1,17 +1,34 @@
 @extends('layouts.app')
 
 @section('meta')
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ $news->name }} | Galow Tunas Bangsa</title>
     <meta name="description" content="{{ Str::limit(strip_tags($news->content), 150) }}">
+
+    <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="article" />
     <meta property="og:title" content="{{ $news->name }}" />
     <meta property="og:description" content="{{ Str::limit(strip_tags($news->content), 150) }}" />
-    <meta property="og:image" content="{{ asset('uploads/' . $news->photo) }}" />
+    <meta property="og:image" content="{{ url('uploads/' . $news->photo) }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content="{{ request()->fullUrl() }}" />
+    <meta property="og:site_name" content="Galow Tunas Bangsa" />
+    <meta property="article:published_time" content="{{ $news->created_at->toISOString() }}" />
+    <meta property="article:author" content="{{ $news->author->name }}" />
+    <meta property="article:section" content="{{ $news->category->name }}" />
+
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{ $news->name }}" />
     <meta name="twitter:description" content="{{ Str::limit(strip_tags($news->content), 150) }}" />
-    <meta name="twitter:image" content="{{ asset('uploads/' . $news->photo) }}" />
+    <meta name="twitter:image" content="{{ url('uploads/' . $news->photo) }}" />
+    <meta name="twitter:site" content="@galowtunasbangsa" />
+
+    <!-- Additional Meta Tags -->
+    <meta name="author" content="{{ $news->author->name }}" />
+    <meta name="keywords" content="{{ $news->category->name }}, Galow Tunas Bangsa, berita, {{ $news->name }}" />
 @endsection
 
 @section('content')
@@ -281,22 +298,23 @@
                                         <path
                                             d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.794.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.324-.593 1.324-1.324V1.325C24 .593 23.407 0 22.675 0z" />
                                     </svg>
-                                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($news->name) }}"
-                                        target="_blank" class="btn x" title="Share to X">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1200 1227">
-                                            <g>
-                                                <path
-                                                    d="M1142 0h-222l-320 418L280 0H0l462 651L0 1227h222l320-418 320 418h280L738 576z" />
-                                            </g>
-                                        </svg>
-                                    </a>
-                                    <a href="https://api.whatsapp.com/send?text={{ urlencode($news->name . ' ' . request()->fullUrl()) }}"
-                                        target="_blank" class="btn whatsapp" title="Share to WhatsApp">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                </a>
+                                <a href="https://twitter.com/intent/tweet?url={{ urlencode(request()->fullUrl()) }}&text={{ urlencode($news->name) }}"
+                                    target="_blank" class="btn x" title="Share to X">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 1200 1227">
+                                        <g>
                                             <path
-                                                d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.15 1.6 5.96L0 24l6.24-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 22.05c-1.92 0-3.8-.5-5.45-1.45l-.39-.23-3.7.96.99-3.61-.25-.39A10.05 10.05 0 0 1 1.95 12c0-5.58 4.52-10.05 10.05-10.05 2.69 0 5.22 1.05 7.12 2.95a10.05 10.05 0 0 1 2.95 7.12c0 5.58-4.52 10.05-10.05 10.05zm5.8-7.88c-.32-.16-1.88-.93-2.17-1.04-.29-.1-.5-.16-.71.16-.2.32-.82 1.04-1.01 1.25-.18.2-.37.23-.69.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.6-1.9-1.79-2.22-.18-.32-.02-.5.14-.66.14-.14.32-.37.48-.56.16-.18.2-.32.32-.53.1-.2.05-.4-.03-.56-.08-.16-.71-1.7-.97-2.32-.26-.63-.52-.54-.71-.55h-.6c-.2 0-.53.08-.81.4-.28.32-1.06 1.04-1.06 2.54 0 1.5 1.09 2.96 1.24 3.17.16.2 2.14 3.27 5.18 4.58.72.31 1.28.5 1.72.64.72.23 1.37.2 1.88.12.57-.08 1.88-.77 2.15-1.5.27-.73.27-1.36.2-1.5-.08-.16-.29-.24-.6-.4z" />
-                                        </svg>
-                                    </a>
+                                                d="M1142 0h-222l-320 418L280 0H0l462 651L0 1227h222l320-418 320 418h280L738 576z" />
+                                        </g>
+                                    </svg>
+                                </a>
+                                <a href="https://api.whatsapp.com/send?text={{ urlencode($news->name . ' ' . request()->fullUrl()) }}"
+                                    target="_blank" class="btn whatsapp" title="Share to WhatsApp">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.15 1.6 5.96L0 24l6.24-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.2-3.48-8.52zM12 22.05c-1.92 0-3.8-.5-5.45-1.45l-.39-.23-3.7.96.99-3.61-.25-.39A10.05 10.05 0 0 1 1.95 12c0-5.58 4.52-10.05 10.05-10.05 2.69 0 5.22 1.05 7.12 2.95a10.05 10.05 0 0 1 2.95 7.12c0 5.58-4.52 10.05-10.05 10.05zm5.8-7.88c-.32-.16-1.88-.93-2.17-1.04-.29-.1-.5-.16-.71.16-.2.32-.82 1.04-1.01 1.25-.18.2-.37.23-.69.08-.32-.16-1.35-.5-2.57-1.6-.95-.85-1.6-1.9-1.79-2.22-.18-.32-.02-.5.14-.66.14-.14.32-.37.48-.56.16-.18.2-.32.32-.53.1-.2.05-.4-.03-.56-.08-.16-.71-1.7-.97-2.32-.26-.63-.52-.54-.71-.55h-.6c-.2 0-.53.08-.81.4-.28.32-1.06 1.04-1.06 2.54 0 1.5 1.09 2.96 1.24 3.17.16.2 2.14 3.27 5.18 4.58.72.31 1.28.5 1.72.64.72.23 1.37.2 1.88.12.57-.08 1.88-.77 2.15-1.5.27-.73.27-1.36.2-1.5-.08-.16-.29-.24-.6-.4z" />
+                                    </svg>
+                                </a>
                             </div>
                         </div>
                     </div>

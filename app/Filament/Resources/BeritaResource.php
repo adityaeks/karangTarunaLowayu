@@ -98,15 +98,22 @@ class BeritaResource extends Resource
                 ImageColumn::make('photo')
                     ->label('Thumbnail')
                     ->getStateUsing(fn ($record) => asset('uploads/' . $record->photo)),
-                TextColumn::make('published_at')->label('Date'),
+                TextColumn::make('published_at')
+                    ->label('Published Date')
+                    ->date('d/m/Y')
+                    ->sortable(),
                 TextColumn::make('name')->label('Title')
-                    ->limit(30),
-                TextColumn::make('author.name')->label('Author'),
-                TextColumn::make('category.name')->label('Category'),
+                    ->limit(30)
+                    ->searchable(),
+                TextColumn::make('author.name')->label('Author')
+                    ->sortable(),
+                TextColumn::make('category.name')->label('Category')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('views_count')
                     ->label('Total Views')
                     ->getStateUsing(fn(Berita $record) => $record->views()->count()),
             ])
+            ->defaultSort('created_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(), // Add this line

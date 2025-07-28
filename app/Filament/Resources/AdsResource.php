@@ -25,6 +25,9 @@ class AdsResource extends Resource
     protected static ?string $navigationLabel = 'Promosi';
     protected static ?string $pluralLabel = 'Promosi';
 
+    // Menonaktifkan menu di sidebar
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function boot(): void
     {
         parent::boot();

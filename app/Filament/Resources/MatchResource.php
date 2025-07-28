@@ -41,8 +41,18 @@ class MatchResource extends Resource
                     ->numeric()
                     ->prefix('RT ')
                     ->maxLength(3),
-                Forms\Components\TextInput::make('score')
-                    ->maxLength(20),
+                Forms\Components\TextInput::make('score_team1')
+                    ->label('Score Team 1')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(999)
+                    ->default(0),
+                Forms\Components\TextInput::make('score_team2')
+                    ->label('Score Team 2')
+                    ->numeric()
+                    ->minValue(0)
+                    ->maxValue(999)
+                    ->default(0),
                 Forms\Components\DatePicker::make('date')
                     ->required(),
                 Forms\Components\TimePicker::make('time')
@@ -69,19 +79,54 @@ class MatchResource extends Resource
                     ->label('Team 2')
                     ->formatStateUsing(fn($state) => 'RT ' . $state)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('score'),
+                Tables\Columns\TextColumn::make('score_team1')
+                    ->label('Score Team 1')
+                    ->alignCenter(),
+                Tables\Columns\TextColumn::make('score_team2')
+                    ->label('Score Team 2')
+                    ->alignCenter(),
+                Tables\Columns\TextColumn::make('score_combined')
+                    ->label('Score')
+                    ->getStateUsing(fn($record) => $record->score_team1 . ' - ' . $record->score_team2)
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('date')->date(),
                 Tables\Columns\TextColumn::make('time')
                     ->formatStateUsing(fn($state) => substr($state, 0, 5)),
                 Tables\Columns\TextColumn::make('type')->label('Jenis'),
             ])
+            ->defaultSort('date', 'asc')
+            ->modifyQueryUsing(fn (Builder $query) => $query->orderBy('date', 'asc')->orderBy('time', 'asc'))
             ->filters([
+                Tables\Filters\Filter::make('today')
+                    ->label('Hari Ini')
+                    ->toggle()
+                    ->query(fn (Builder $query): Builder => $query->whereDate('date', today()))
+                    ->default(),
+                Tables\Filters\Filter::make('date')
+                    ->form([
+                        Forms\Components\DatePicker::make('date')
+                            ->label('Tanggal Khusus'),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['date'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('date', $date),
+                            );
+                    })
+                    ->indicateUsing(function (array $data): ?string {
+                        if ($data['date']) {
+                            return 'Tanggal: ' . \Carbon\Carbon::parse($data['date'])->format('d M Y');
+                        }
+                        return null;
+                    }),
                 Tables\Filters\SelectFilter::make('type')
                     ->options([
                         'sepakbola' => 'Sepak Bola',
                         'voli' => 'Bola Voli',
                     ]),
             ])
+            ->filtersFormColumns(2)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

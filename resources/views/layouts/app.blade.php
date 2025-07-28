@@ -14,15 +14,19 @@
 
         gtag('config', 'G-9CFWZFNS4C');
     </script>
-    @yield('meta')
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Galow Tunas Bangsa</title>
-    <meta name="description" content="Portal informasi, berita, dan kegiatan Karang Taruna Lowayu - Galow Tunas Bangsa.">
-    <meta property="og:title" content="Galow Tunas Bangsa" />
-    <meta property="og:description" content="Portal informasi, berita, dan kegiatan Karang Taruna Lowayu - Galow Tunas Bangsa." />
-    <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
-    <meta property="og:url" content="{{ url()->current() }}" />
+
+    @hasSection('meta')
+        @yield('meta')
+    @else
+        <title>Galow Tunas Bangsa</title>
+        <meta name="description" content="Portal informasi, berita, dan kegiatan Karang Taruna Lowayu - Galow Tunas Bangsa.">
+        <meta property="og:title" content="Galow Tunas Bangsa" />
+        <meta property="og:description" content="Portal informasi, berita, dan kegiatan Karang Taruna Lowayu - Galow Tunas Bangsa." />
+        <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
+        <meta property="og:url" content="{{ url()->current() }}" />
+    @endif
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
     {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}"> --}}

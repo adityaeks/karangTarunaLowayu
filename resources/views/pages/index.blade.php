@@ -16,12 +16,129 @@
             }, 1000);
         });
     </script>
+
+    <!-- Winner Animation Styles -->
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-8px);
+            }
+            60% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(220, 53, 69, 0.8), 0 0 30px rgba(220, 53, 69, 0.6);
+            }
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1) rotate(180deg);
+            }
+        }
+
+        .winner-container {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .trophy-icon {
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        .crown-icon {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffc107;
+            border-radius: 50%;
+            animation: sparkle 1.5s ease-in-out infinite;
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.3s; }
+        .sparkle:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 0.6s; }
+        .sparkle:nth-child(4) { bottom: 15%; right: 25%; animation-delay: 0.9s; }
+
+        .score-box-winner {
+            background: linear-gradient(45deg, #dc3545, #e74c3c, #c0392b);
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+            transform: scale(1.05);
+            border-radius: 8px;
+            padding: 4px 8px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .team-winner {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-winner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+    </style>
 @endsection
 @section('meta')
     <title>Galow Tunas Bangsa - Portal Informasi & Berita Desa Lowayu</title>
-    <meta name="description" content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu.">
+    <meta name="description"
+        content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu.">
     <meta property="og:title" content="Galow Tunas Bangsa - Portal Informasi & Berita Desa Lowayu" />
-    <meta property="og:description" content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu." />
+    <meta property="og:description"
+        content="Portal informasi, berita, kegiatan, dan komunitas Karang Taruna Lowayu (Galow Tunas Bangsa) Desa Lowayu." />
     <meta property="og:image" content="{{ asset('assets/img/logo/logo-utama.jpg') }}" />
     <meta property="og:url" content="{{ url()->current() }}" />
 @endsection
@@ -137,30 +254,61 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="sepakBolaCarousel" class="carousel slide" data-ride="false" data-interval="false" data-touch="true">
+                            <div id="sepakBolaCarousel" class="carousel slide" data-ride="false" data-interval="false"
+                                data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($sepakBolaGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $sepakBolaActiveDate ? 'active' : '' }}">
                                             @foreach ($matches as $i => $match)
-                                                <div
-                                                    style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 6px 16px;">
+                                                @php
+                                                    $score1 = $match['score_team1'] ?? 0;
+                                                    $score2 = $match['score_team2'] ?? 0;
+                                                    $team1Winner = $score1 > $score2;
+                                                    $team2Winner = $score2 > $score1;
+                                                    $isDraw = $score1 == $score2 && $score1 > 0;
+                                                    // Hanya RT 2 yang bisa menjadi winner
+                                                    $rt2Winner = $team2Winner && $match['team2'] == '2';
+                                                @endphp
+                                                <div class="{{ $rt2Winner ? 'winner-container' : '' }}"
+                                                    style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 8px 16px; position: relative; {{ $rt2Winner ? 'background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);' : '' }}">
+                                                    @if($rt2Winner)
+                                                        <!-- Sparkle effects -->
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                    @endif
                                                     <div class="score-display-container mb-2">
-                                                        <span class="team-name-display" style="text-align: right;">
+                                                        <span class="team-name-display" style="text-align: right; transition: all 0.3s ease;">
                                                             RT {{ $match['team1'] }}
                                                         </span>
-                                                        <span class="score-box-display">
-                                                            {{ $match['score_team1'] ?? 0 }} | {{ $match['score_team2'] ?? 0 }}
+                                                        <span class="score-box-display" style="background: linear-gradient(45deg, #dc3545, #e74c3c); color: white; font-weight: bold; box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3); border-radius: 6px; padding: 4px 8px; transition: all 0.3s ease;">
+                                                            {{ $score1 }} |
+                                                            {{ $score2 }}
+                                                            @if($isDraw)
+                                                                <div style="font-size: 8px; margin-top: 2px; opacity: 0.8;">DRAW</div>
+                                                            @endif
                                                         </span>
-                                                        <span class="team-name-display" style="text-align: left;">
+                                                        <span class="team-name-display {{ $rt2Winner ? 'team-winner' : '' }}" style="text-align: left; {{ $rt2Winner ? 'font-weight: bold; color: #dc3545; text-shadow: 0 0 10px rgba(220, 53, 69, 0.3);' : '' }}; transition: all 0.3s ease;">
+                                                            @if($rt2Winner)
+                                                                <span class="trophy-icon" style="display: inline-block;">
+                                                                    <i class="fa fa-trophy" style="color: #ffc107; margin-right: 8px; font-size: 16px; text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);"></i>
+                                                                </span>
+                                                            @endif
                                                             RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
                                                     <div class="text-center">
                                                         <div class="d-inline-block"
-                                                            style="font-size:10px; color:#555; background: #fff3e0; padding: 1px 8px 1px 6px; border-radius: 8px; font-weight: bold;">
+                                                            style="font-size:10px; color:#555; background: {{ ($team1Winner || $team2Winner) ? 'linear-gradient(45deg, #fff3e0, #ffeaa7)' : '#fff3e0' }}; padding: 3px 10px; border-radius: 12px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
                                                             <i class="fa fa-clock-o" style="margin-right:3px;"></i>
                                                             {{ \Carbon\Carbon::parse($match['date'])->format('d M Y') }} •
                                                             {{ substr($match['time'], 0, 5) }}
+                                                            @if($team1Winner || $team2Winner)
+                                                                <span style="margin-left: 5px; color: #28a745;">
+                                                                    <i class="fa fa-check-circle"></i>
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -178,6 +326,102 @@
                                 </a>
                             </div>
                         </div>
+
+                        <!-- Card Tarik Tambang  (Desain Mirip Gambar, Jam di Bawah) -->
+                        <div class="card mb-3 shadow-sm mt-0" style="border-radius: 8px; border: 1.5px solid #eee;">
+                            <div class="p-3" style="background: #fff; border-bottom: 1.5px solid #eee;">
+                                <div class="text-center">
+                                    <span
+                                        style="
+                                        font-weight: 900;
+                                        font-size: 18px;
+                                        letter-spacing: 2px;
+                                        color: #ba2d11;
+                                        text-transform: uppercase;
+                                        text-shadow: 1px 1px 2px #eee;
+                                        /* border-bottom: 2px solid #ba2d11; */
+                                        padding-bottom: 3px;
+                                        display: inline-block;">
+                                        🪢 TARIK TAMBANG
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="tarikTambangCarousel" class="carousel slide" data-ride="false"
+                                data-interval="false" data-touch="true">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        @php
+                                            $score1 = 0;
+                                            $score2 = 2;
+                                            $team1Winner = $score1 > $score2;
+                                            $team2Winner = $score2 > $score1;
+                                            $isDraw = $score1 == $score2 && $score1 > 0;
+                                            // Hanya RT 30 yang bisa menjadi winner
+                                            $rt30Winner = $team2Winner && 30 == 30;
+                                        @endphp
+                                        <div class="{{ $rt30Winner ? 'winner-container' : '' }}"
+                                            style="background: #fff; border-bottom: 1.5px solid #eee; padding: 8px 16px; position: relative; {{ $rt30Winner ? 'background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);' : '' }}">
+                                            @if ($rt30Winner)
+                                                <!-- Sparkle effects -->
+                                                <div class="sparkle"></div>
+                                                <div class="sparkle"></div>
+                                                <div class="sparkle"></div>
+                                                <div class="sparkle"></div>
+                                            @endif
+                                            <div class="score-display-container mb-2">
+                                                <span class="team-name-display"
+                                                    style="text-align: right; transition: all 0.3s ease;">
+                                                    RT 32
+                                                </span>
+                                                <span class="score-box-display"
+                                                    style="background: linear-gradient(45deg, #dc3545, #e74c3c); color: white; font-weight: bold; box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3); border-radius: 6px; padding: 4px 8px; transition: all 0.3s ease;">
+                                                    {{ $score1 }} |
+                                                    {{ $score2 }}
+                                                    @if ($isDraw)
+                                                        <div style="font-size: 8px; margin-top: 2px; opacity: 0.8;">
+                                                            DRAW
+                                                        </div>
+                                                    @endif
+                                                </span>
+                                                <span class="team-name-display {{ $rt30Winner ? 'team-winner' : '' }}"
+                                                    style="text-align: left; {{ $rt30Winner ? 'font-weight: bold; color: #dc3545; text-shadow: 0 0 10px rgba(220, 53, 69, 0.3);' : '' }}; transition: all 0.3s ease;">
+                                                    @if ($rt30Winner)
+                                                        <span class="trophy-icon" style="display: inline-block;">
+                                                            <i class="fa fa-trophy"
+                                                                style="color: #ffc107; margin-right: 8px; font-size: 16px; text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);"></i>
+                                                        </span>
+                                                    @endif
+                                                    RT 30
+                                                </span>
+                                            </div>
+                                            <div class="text-center">
+                                                <div class="d-inline-block"
+                                                    style="font-size:10px; color:#555; background: {{ $team1Winner || $team2Winner ? 'linear-gradient(45deg, #fff3e0, #ffeaa7)' : '#fff3e0' }}; padding: 3px 10px; border-radius: 12px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+                                                    <i class="fa fa-clock-o" style="margin-right:3px;"></i>
+                                                    03 Aug 2025 • 16:00
+                                                    @if ($team1Winner || $team2Winner)
+                                                        <span style="margin-left: 5px; color: #28a745;">
+                                                            <i class="fa fa-check-circle"></i>
+                                                        </span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#tarikTambangCarousel" role="button"
+                                data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#tarikTambangCarousel" role="button"
+                                data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
                         <!-- Card Bola voli (Desain Mirip Gambar, Jam di Bawah) -->
                         <div class="card mb-3 shadow-sm mt-0" style="border-radius: 8px; border: 1.5px solid #eee;">
                             <div class="p-3" style="background: #fff; border-bottom: 1.5px solid #eee;">
@@ -197,30 +441,61 @@
                                     </span>
                                 </div>
                             </div>
-                            <div id="voliCarousel" class="carousel slide" data-ride="false" data-interval="false" data-touch="true">
+                            <div id="voliCarousel" class="carousel slide" data-ride="false" data-interval="false"
+                                data-touch="true">
                                 <div class="carousel-inner">
                                     @foreach ($voliGrouped as $date => $matches)
                                         <div class="carousel-item {{ $date == $voliActiveDate ? 'active' : '' }}">
                                             @foreach ($matches as $i => $match)
-                                                <div
-                                                    style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 6px 16px;">
+                                                @php
+                                                    $score1 = $match['score_team1'] ?? 0;
+                                                    $score2 = $match['score_team2'] ?? 0;
+                                                    $team1Winner = $score1 > $score2;
+                                                    $team2Winner = $score2 > $score1;
+                                                    $isDraw = $score1 == $score2 && $score1 > 0;
+                                                    // Hanya RT 2 yang bisa menjadi winner
+                                                    $rt2Winner = $team2Winner && $match['team2'] == 'PEMENANG';
+                                                @endphp
+                                                <div class="{{ $rt2Winner ? 'winner-container' : '' }}"
+                                                    style="background: {{ $i == 0 ? '#f7f7f7' : '#fff' }}; border-bottom: 1.5px solid #eee; padding: 8px 16px; position: relative; {{ $rt2Winner ? 'background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);' : '' }}">
+                                                    @if($rt2Winner)
+                                                        <!-- Sparkle effects -->
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                        <div class="sparkle"></div>
+                                                    @endif
                                                     <div class="score-display-container mb-2">
-                                                        <span class="team-name-display" style="text-align: right;">
+                                                        <span class="team-name-display" style="text-align: right; transition: all 0.3s ease;">
                                                             RT {{ $match['team1'] }}
                                                         </span>
-                                                        <span class="score-box-display">
-                                                            {{ $match['score_team1'] ?? 0 }} | {{ $match['score_team2'] ?? 0 }}
+                                                        <span class="score-box-display" style="background: linear-gradient(45deg, #dc3545, #e74c3c); color: white; font-weight: bold; box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3); border-radius: 6px; padding: 4px 8px; transition: all 0.3s ease;">
+                                                            {{ $score1 }} |
+                                                            {{ $score2 }}
+                                                            @if($isDraw)
+                                                                <div style="font-size: 8px; margin-top: 2px; opacity: 0.8;">DRAW</div>
+                                                            @endif
                                                         </span>
-                                                        <span class="team-name-display" style="text-align: left;">
+                                                        <span class="team-name-display {{ $rt2Winner ? 'team-winner' : '' }}" style="text-align: left; {{ $rt2Winner ? 'font-weight: bold; color: #dc3545; text-shadow: 0 0 10px rgba(220, 53, 69, 0.3);' : '' }}; transition: all 0.3s ease;">
+                                                            @if($rt2Winner)
+                                                                <span class="trophy-icon" style="display: inline-block;">
+                                                                    <i class="fa fa-trophy" style="color: #ffc107; margin-right: 8px; font-size: 16px; text-shadow: 0 0 10px rgba(255, 193, 7, 0.5);"></i>
+                                                                </span>
+                                                            @endif
                                                             RT {{ $match['team2'] }}
                                                         </span>
                                                     </div>
                                                     <div class="text-center">
                                                         <div class="d-inline-block"
-                                                            style="font-size:10px; color:#555; background: #fff3e0; padding: 1px 8px 1px 6px; border-radius: 8px; font-weight: bold;">
+                                                            style="font-size:10px; color:#555; background: {{ ($team1Winner || $team2Winner) ? 'linear-gradient(45deg, #fff3e0, #ffeaa7)' : '#fff3e0' }}; padding: 3px 10px; border-radius: 12px; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;">
                                                             <i class="fa fa-clock-o" style="margin-right:3px;"></i>
                                                             {{ \Carbon\Carbon::parse($match['date'])->format('d M Y') }} •
                                                             {{ substr($match['time'], 0, 5) }}
+                                                            @if($team1Winner || $team2Winner)
+                                                                <span style="margin-left: 5px; color: #28a745;">
+                                                                    <i class="fa fa-check-circle"></i>
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,7 +511,8 @@
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="sr-only">Next</span>
                                 </a>
-                            </div>                        </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -482,17 +758,20 @@
     </div> --}}
 
     <!-- Popup Modal -->
-    <div class="modal fade" id="popupImageModal" tabindex="-1" role="dialog" aria-labelledby="popupImageModalLabel" aria-hidden="true" style="z-index: 9999;">
+    <div class="modal fade" id="popupImageModal" tabindex="-1" role="dialog" aria-labelledby="popupImageModalLabel"
+        aria-hidden="true" style="z-index: 9999;">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content position-relative">
                 <!-- Tombol Close "X" -->
-                <button type="button" class="close position-absolute" style="top: 10px; right: 15px; z-index: 10;" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close position-absolute" style="top: 10px; right: 15px; z-index: 10;"
+                    data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true" style="font-size: 2rem;">&times;</span>
                 </button>
 
                 <div class="modal-body p-0">
                     <a href="https://galowtunasbangsa.com/Halo!.GALOW.Pengaduan" target="_blank">
-                        <img src="{{ asset('assets/img/logo/modal-pengaduan.jpg') }}" alt="Popup" class="img-fluid w-100">
+                        <img src="{{ asset('assets/img/logo/modal-pengaduan.jpg') }}" alt="Popup"
+                            class="img-fluid w-100">
                     </a>
                     <!--<img src="{{ asset('assets/img/logo/logo-utama.jpg') }}" alt="Popup" class="img-fluid w-100">-->
                 </div>
@@ -729,7 +1008,7 @@
             padding: 4px 12px !important;
             border-radius: 6px !important;
             font-size: 15px !important;
-            box-shadow: 0 2px 8px rgba(186,45,17,0.08) !important;
+            box-shadow: 0 2px 8px rgba(186, 45, 17, 0.08) !important;
             letter-spacing: 2px !important;
             white-space: nowrap !important;
             min-width: 60px !important;
@@ -744,6 +1023,7 @@
                 min-width: 80px !important;
                 font-size: 15px !important;
             }
+
             .score-box-display {
                 font-size: 13px !important;
                 padding: 3px 8px !important;
@@ -756,10 +1036,10 @@
         $(function() {
             // Inisialisasi carousels - Autoplay dinonaktifkan
             $('#sepakBolaCarousel, #voliCarousel').carousel('pause').carousel({
-                interval: false,  // Nonaktifkan autoplay
-                pause: true,      // Pause saat hover
-                wrap: true,       // Allow looping
-                ride: false       // Jangan mulai otomatis
+                interval: false, // Nonaktifkan autoplay
+                pause: true, // Pause saat hover
+                wrap: true, // Allow looping
+                ride: false // Jangan mulai otomatis
             });
 
             // Pastikan autoplay benar-benar dinonaktifkan

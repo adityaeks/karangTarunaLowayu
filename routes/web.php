@@ -30,7 +30,7 @@ Route::get('/blog', function () {
     $totalNewsCount = Berita::count(); // Calculate total count of all news items
 
     return view('pages.blog', compact('news', 'categories', 'totalNewsCount'));
-});
+})->name('blog');
 
 Route::get('/detail/{slug}', [BeritaController::class, 'show'])->name('blog.detail');
 
@@ -77,9 +77,9 @@ Route::get('/organisasi', function () {
     $organisasis = Organisasi::all();
     return view('pages.organitation', compact('organisasis'));
 });
-Route::get('/halo.galow.pengaduan', function () {
-    return view('pages.complaint');
-})->name('pengaduan.form');
+Route::get('/halo.galow.pengaduan', [PengaduanController::class, 'index'])->name('pengaduan.form');
+
+
 
 // Route::post('/pengaduan/store', [PengaduanController::class, 'store'])
 //     ->name('pengaduan.store');

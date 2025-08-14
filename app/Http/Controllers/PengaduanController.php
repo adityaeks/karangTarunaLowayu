@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\PengaduanMail;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;  // ← import
@@ -12,11 +13,20 @@ use Illuminate\Support\Facades\Mail;  // ← import
 
 class PengaduanController extends Controller
 {
+    public function index()
+    {
+        // Ambil 5 berita terbaru seperti di halaman blog
+        $latestNews = Berita::with(['category'])
+            ->latest()
+            ->limit(3)
+            ->get();
+
+        return view('pages.complaint', compact('latestNews'));
+    }
+
     public function store(Request $request)
     {
         try {
-            \Log::info('Pengaduan request received:', $request->all());
-
             // Validasi data
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -24,8 +34,6 @@ class PengaduanController extends Controller
                 'content' => 'required|string',
                 'bukti_pengaduan' => 'nullable|file|mimes:jpg,jpeg,png,pdf,doc,docx|max:5120',
             ]);
-
-            \Log::info('Validation passed');
 
             // Handle file upload
             $filePath = null;
@@ -55,18 +63,15 @@ class PengaduanController extends Controller
             // $toEmail = 'galowtunasbangsa@gmail.com';
             // Mail::to($toEmail)->send(new PengaduanMail($pengaduan));
 
-            \Log::info('Pengaduan saved successfully:', ['id' => $pengaduan->id]);
 
             return redirect()->back()->with('success', 'Pengaduan berhasil dikirim.');
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation failed:', $e->errors());
             return redirect()->back()
                 ->withErrors($e->validator)
                 ->withInput();
 
         } catch (\Exception $e) {
-            \Log::error('Error saving pengaduan:', ['error' => $e->getMessage()]);
             return redirect()->back()
                 ->withErrors(['error' => 'Terjadi kesalahan: ' . $e->getMessage()])
                 ->withInput();
